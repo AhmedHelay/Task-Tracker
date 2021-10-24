@@ -1,14 +1,10 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @project.name %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @project.description %>
-</p>
-
-<%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Back', projects_path %>
+<div class="jumbotron">
+<h3><strong>Project Name:</strong></h3>
+  <h4><%= @project.name %><h4>
+  <br>
+<h3><strong>Description:</strong></h3>
+  <h4><%= @project.description %><h4>
+  <br>
+<%= link_to 'Edit', edit_project_path(@project) , class: 'btn btn-primary'%>
+<%= link_to 'Back', projects_path , class: 'btn btn-primary' %>
+</div>
