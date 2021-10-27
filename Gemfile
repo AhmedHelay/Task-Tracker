@@ -29,7 +29,7 @@ gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
 gem 'sassc-rails', '>= 2.1.0'
 gem 'jquery-rails'
 gem 'simple_form'
-gem 'rubocop', '~> 0.39.0'
+gem 'rubocop', '~> 1.22', '>= 1.22.2'
 gem 'pg', '~> 1.2', '>= 1.2.3'
 
 
