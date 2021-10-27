@@ -5,8 +5,6 @@ ruby '3.0.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.1'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3', '~> 1.4'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
@@ -31,7 +29,8 @@ gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
 gem 'sassc-rails', '>= 2.1.0'
 gem 'jquery-rails'
 gem 'simple_form'
-
+gem 'rubocop', '~> 1.22', '>= 1.22.2'
+gem 'pg', '~> 1.2', '>= 1.2.3'
 
 
 group :development, :test do
@@ -48,8 +47,8 @@ group :development do
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+#  gem 'sqlite3', '~> 1.4'
 end
-
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 3.26'
