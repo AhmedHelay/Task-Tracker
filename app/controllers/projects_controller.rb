@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: %i[ show edit update destroy ]
+  before_action :require_login
 
   # GET /projects or /projects.json
   def index
@@ -66,4 +67,10 @@ class ProjectsController < ApplicationController
     def project_params
       params.require(:project).permit(:name, :description)
     end
+
+  def require_login
+    unless current_user
+      redirect_to new_user_registration_path
+      end
+  end
 end
