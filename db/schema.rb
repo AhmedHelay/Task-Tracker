@@ -25,12 +25,12 @@ ActiveRecord::Schema.define(version: 2021_10_30_205353) do
   end
 
   create_table "tasks", force: :cascade do |t|
+    t.integer "project_id"
     t.string "title"
     t.text "description"
     t.datetime "deadline_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "project_id"
     t.index ["project_id"], name: "index_tasks_on_project_id"
   end
 
