@@ -1,5 +1,9 @@
 <div class="alert alert-warning alert-dismissible fade show" role="alert">
-  <%= notice %>
+  <% flash.each do |name , msg | %>
+  <div class="alert alert-<% name %>">
+  <%= msg %>
+  </div>
+  <% end %>
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>

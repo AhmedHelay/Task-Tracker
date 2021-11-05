@@ -5,6 +5,8 @@
 <h3><strong>Description:</strong></h3>
   <h4><%= @project.description %><h4>
   <br>
+  <%= link_to 'View Tasks', tasks_path(@project) , class: 'btn btn-secondary -lg'%>
+<br><br>
 <%= link_to 'Edit', edit_project_path(@project) , class: 'btn btn-primary'%>
 <%= link_to 'Back', projects_path , class: 'btn btn-primary' %>
 </div>

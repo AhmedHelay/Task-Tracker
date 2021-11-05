@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
+  before_action :require_login
 
   # GET /tasks or /tasks.json
   def index
@@ -64,6 +65,12 @@ class TasksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def task_params
-      params.require(:task).permit(:project_id, :title, :description, :deadline_at)
+      params.require(:task).permit(:id, :title, :description, :deadline_at, :project_id)
+    end
+    
+    def require_login
+      unless current_user
+        redirect_to new_user_registration_path
+        end
     end
 end
