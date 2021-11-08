@@ -1,21 +1,21 @@
-require "test_helper"
+require 'rails_helper'
 
 class TasksControllerTest < ActionDispatch::IntegrationTest
   setup do
     @task = tasks(:one)
   end
 
-  test "should get index" do
+  it "should get index" do
     get tasks_url
     assert_response :success
   end
 
-  test "should get new" do
+  it "should get new" do
     get new_task_url
     assert_response :success
   end
 
-  test "should create task" do
+  it "should create task" do
     assert_difference('Task.count') do
       post tasks_url, params: { task: { deadline_at: @task.deadline_at, description: @task.description, project_id: @task.project_id, title: @task.title } }
     end
@@ -23,22 +23,22 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to task_url(Task.last)
   end
 
-  test "should show task" do
+  it "should show task" do
     get task_url(@task)
     assert_response :success
   end
 
-  test "should get edit" do
+  it "should get edit" do
     get edit_task_url(@task)
     assert_response :success
   end
 
-  test "should update task" do
+  it "should update task" do
     patch task_url(@task), params: { task: { deadline_at: @task.deadline_at, description: @task.description, project_id: @task.project_id, title: @task.title } }
     assert_redirected_to task_url(@task)
   end
 
-  test "should destroy task" do
+  it "should destroy task" do
     assert_difference('Task.count', -1) do
       delete task_url(@task)
     end

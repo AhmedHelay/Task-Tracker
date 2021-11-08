@@ -11,7 +11,7 @@
     </div>
   <% end %>
   <div class="field form-group">
-    <%= form.number_field :project_id , class: 'form-control', placeholder: 'project Id' %>
+    <%= form.number_field :project_id , class: 'form-control', placeholder: 'Project ID' %>
   </div>
 
   <div class="field form-group">
@@ -23,9 +23,8 @@
   </div>
 
   <div class="field form-group">
-    <%= form.datetime_select :deadline_at , class: 'form-control', placeholder: 'deadline' %>
+    <%= form.datetime_select :deadline_at , class: 'form-control text-dark', placeholder: 'deadline' %>
   </div>
-
   <div class="actions">
     <%= form.submit class: 'btn btn-primary' %>
   </div>

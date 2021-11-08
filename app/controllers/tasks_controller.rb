@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
-  before_action :require_login
-
+  before_action :require_login 
+  
   # GET /tasks or /tasks.json
   def index
     @tasks = Task.all
@@ -57,6 +57,14 @@ class TasksController < ApplicationController
     end
   end
 
+  def change_status
+    if task.status == false
+      task.status = true
+    else 
+      task.status = false    
+    end  
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_task
@@ -65,12 +73,13 @@ class TasksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def task_params
-      params.require(:task).permit(:id, :title, :description, :deadline_at, :project_id)
+      params.require(:task).permit(:id, :title, :description, :deadline_at, :project_id ).merge(status: false)
     end
-    
+  
     def require_login
       unless current_user
         redirect_to new_user_registration_path
         end
     end
+        
 end

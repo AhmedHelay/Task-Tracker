@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: %i[ show edit update destroy ]
-  before_action :require_login
-
+  before_action :require_login 
+  
   # GET /projects or /projects.json
   def index
     @projects = Project.all
@@ -56,7 +56,14 @@ class ProjectsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+=begin
+  def add_user(email)
+    User.each do |user|
+      if user.email == email
+       user.projects.add(@project)
+    end 
+  end 
+=end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_project
@@ -67,10 +74,9 @@ class ProjectsController < ApplicationController
     def project_params
       params.require(:project).permit(:name, :description ).merge(user_id: current_user.id)
     end
-
-  def require_login
-    unless current_user
-      redirect_to new_user_registration_path
-      end
-  end
+    def require_login
+      unless current_user
+        redirect_to new_user_registration_path
+        end
+    end
 end

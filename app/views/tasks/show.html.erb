@@ -1,12 +1,20 @@
-<div class="jumbotron">
 <p>
   <strong>Project:</strong>
-  <%= @task.project_id %>
+  <%= Project.find(@task.project_id).name%>
 </p>
 
 <p>
   <strong>Title:</strong>
   <%= @task.title %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <% if @task.status == true %>
+    Done
+    <% else %>
+    On Progress
+    <% end %>
 </p>
 
 <p>
@@ -21,5 +29,12 @@
 
 <%= link_to 'Edit', edit_task_path(@task), class: 'btn btn-primary'%>
 <%= link_to 'Back', tasks_path , class: 'btn btn-primary' %>
-</div>
+
+<% if @task.status == false%>
+  <div class="btn btn-success ">Finish<% @task.status = true%></div>
+<% else %>
+  <div class="btn btn-primary ">Back to Progress<% @task.status = false%></div>
+<% end %>
+
+
 
