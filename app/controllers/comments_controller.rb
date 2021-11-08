@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: %i[ show edit update destroy ]
-
+  
   # GET /comments or /comments.json
   def index
     @comments = Comment.all
@@ -64,6 +64,13 @@ class CommentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def comment_params
-      params.require(:comment).permit(:user_id, :task_id, :content)
+      params.require(:comment).permit(:task_id, :content).merge(user_id: current_user.id)
     end
+    before_action :require_login 
+    def require_login
+      unless current_user
+        redirect_to new_user_registration_path
+        end
+    end
+    
 end

@@ -2,12 +2,12 @@
 
 <p>
   <strong>User:</strong>
-  <%= @comment.user_id %>
+  <%= User.find(@comment.user_id ).fullname%>
 </p>
 
 <p>
   <strong>Task:</strong>
-  <%= @comment.task_id %>
+  <%= Task.find(@comment.task_id ).title%>
 </p>
 
 <p>
@@ -15,5 +15,5 @@
   <%= @comment.content %>
 </p>
 
-<%= link_to 'Edit', edit_comment_path(@comment) %> |
-<%= link_to 'Back', comments_path %>
+<%= link_to 'Edit', edit_comment_path(@comment) ,class: 'btn btn-primary' %>
+<%= link_to 'Back', comments_path ,class: 'btn btn-secondary'%>

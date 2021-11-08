@@ -1,15 +1,13 @@
-
 <%= simple_form_for(@comment) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-
-  <div class="form-inputs">
-    <%= f.input :user_id %>
-    <%= f.input :task_id %>
-    <%= f.input :content %>
+  <div class="field form-group">
+    <%= f.number_field :task_id , class: 'form-control', placeholder: 'Task ID' %>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
+  <div class="field form-group">
+    <%= f.text_area :content , class: 'form-control text-dark', placeholder: 'Your comment' %>
+  </div>
+  <div class="actions">
+    <%= f.submit class: 'btn btn-primary' %>
   </div>
 <% end %>

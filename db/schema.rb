@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 202111068765965) do
     t.datetime "deadline_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "status"
     t.index ["project_id"], name: "index_tasks_on_project_id"
   end
 
