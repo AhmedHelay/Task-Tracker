@@ -1,0 +1,28 @@
+<h1>Tasks</h1>
+
+<table class = "table table-responsive table-light table-striped table-bordered">
+  <thead class = "thead-light">
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Deadline at</th>
+      <th>Status</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% Task.all.each do |task| %>
+      <% if task.project_id == @project.id%>
+      <tr>
+        <td><%= link_to task.title , task %></td>
+        <td><%= task.description %></td>
+        <td><%= task.deadline_at %></td>
+        <td><%= task.status %></td>
+        <td><%= link_to 'View Comments', task ,class: 'btn btn-primary'%></td>
+        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } , class: 'btn btn-danger'%></td>
+      </tr>
+      <% end %>
+      <% end %>
+  </tbody>
+</table>

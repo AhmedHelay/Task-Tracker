@@ -10,16 +10,15 @@
   </thead>
 
   <tbody>
-    <% @projects.each do |project| %>
-      <% if current_user.id == project.user_id%>
+    <% @current_user.projects_id.each do |p_id| %>
+        <% project = Project.find(p_id);%>
       <tr>
         <td><%= link_to project.name , project %></td>
         <td><%= project.description %></td>
-        <td><%= link_to 'View Tasks', tasks_path(@project) ,class: 'btn btn-primary'%></td>
+        <td><%= link_to 'View Tasks', project ,class: 'btn btn-primary'%></td>
         <td><%= link_to 'Edit', edit_project_path(project) ,class: 'btn btn-secondary'%></td>
         <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } , class: 'btn btn-danger'%></td>
       </tr>
-      <% end %>
     <% end %>
   </tbody>
 </table>

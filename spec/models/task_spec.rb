@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Task, type: :model do
 
-  current_user = User.first_or_create!(fullname: 'Ahmed' ,email: 'ae@gmail.com', password: '123123' , password_confirmation: '123123')
+  current_user = User.first_or_create!(username: 'Ahmed' ,email: 'ae@gmail.com', password: '123123' , password_confirmation: '123123')
   project = Project.first_or_create(name: 'Cool name',description: 'A description',user_id: current_user.id)
 
   it 'Should has a title' do 

@@ -10,8 +10,9 @@
       </ul>
     </div>
   <% end %>
+
   <div class="field form-group">
-    <%= form.number_field :project_id , class: 'form-control', placeholder: 'Project ID' %>
+    <%= form.hidden_field :project_id, :value => @project.id%>
   </div>
 
   <div class="field form-group">
@@ -22,9 +23,12 @@
     <%= form.text_area :description , class: 'form-control', placeholder: 'description' %>
   </div>
 
-  <div class="field form-group">
-    <%= form.datetime_select :deadline_at , class: 'form-control text-dark', placeholder: 'deadline' %>
+  <div class="field form-group text-dark">
+    <%= form.datetime_select :deadline_at , class: 'form-control text-dark', placeholder: 'deadline' %>  
+     <%= form.select :status, ['Not started yet','On progress','On pause','Finished']%>
+
   </div>
+
   <div class="actions">
     <%= form.submit class: 'btn btn-primary' %>
   </div>

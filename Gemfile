@@ -32,6 +32,7 @@ gem 'simple_form'
 gem 'rubocop', '~> 1.22', '>= 1.22.2'
 gem 'pg', '~> 1.2', '>= 1.2.3'
 gem 'devise', '~> 4.8'
+gem "interactor", "~> 3.0"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

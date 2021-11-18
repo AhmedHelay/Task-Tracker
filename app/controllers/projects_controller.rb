@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: %i[ show edit update destroy ]
+  before_action :set_project, only: %i[show edit update destroy add_user]
   before_action :require_login 
   
   # GET /projects or /projects.json
@@ -56,14 +56,16 @@ class ProjectsController < ApplicationController
       format.json { head :no_content }
     end
   end
-=begin
-  def add_user(email)
-    User.each do |user|
-      if user.email == email
-       user.projects.add(@project)
-    end 
+
+  def add_user
+
+    puts "String --> #{User.find_by(email: add_user_params[:email]).projects_id}"
+    user = User.find_by(email: add_user_params[:email])
+    user.projects_id.push(@project.id)
+    user.save!
+    redirect_to @project
   end 
-=end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_project
@@ -78,5 +80,9 @@ class ProjectsController < ApplicationController
       unless current_user
         redirect_to new_user_registration_path
         end
+    end
+
+    def add_user_params
+      params.require(:user).permit(:email)
     end
 end
