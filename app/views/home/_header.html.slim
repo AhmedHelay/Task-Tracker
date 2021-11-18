@@ -9,6 +9,8 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.py-3
           li.nav-item
             = link_to " Sign Out " , destroy_user_session_path, method: :delete , class: "nav-link"
           li.nav-item
+            = link_to " View Profile " , user_path(current_user.id) , class: "nav-link"
+          li.nav-item
             = link_to " Edit Profile " , edit_user_registration_path , class: "nav-link"
           li.nav-item
             = link_to " Projects " , projects_path , class: "nav-link"
