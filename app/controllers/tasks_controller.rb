@@ -57,14 +57,6 @@ class TasksController < ApplicationController
     end
   end
 
-  def change_status
-    if task.status == false
-      task.status = true
-    else 
-      task.status = false    
-    end  
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_task
@@ -73,7 +65,7 @@ class TasksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def task_params
-      params.require(:task).permit(:id, :title, :description, :deadline_at, :project_id ).merge(status: false)
+      params.require(:task).permit(:id, :title, :description, :deadline_at, :project_id, :status)
     end
   
     def require_login

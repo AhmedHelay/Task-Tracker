@@ -10,11 +10,7 @@
 
 <p>
   <strong>Status:</strong>
-  <% if @task.status == true %>
-    Done
-    <% else %>
-    On Progress
-    <% end %>
+  <%= @task.status %>
 </p>
 
 <p>
@@ -26,15 +22,9 @@
   <strong>Deadline at:</strong>
   <%= @task.deadline_at %>
 </p>
-
-<%= link_to 'Edit', edit_task_path(@task), class: 'btn btn-primary'%>
+<%= render partial: 'comments/index' , comment: @comment %>
+<br>
+<%= render partial: 'comments/new' %>
+<br>
+<%= link_to 'Edit Task', edit_task_path(@task), class: 'btn btn-primary'%>
 <%= link_to 'Back', tasks_path , class: 'btn btn-primary' %>
-
-<% if @task.status == false%>
-  <div class="btn btn-success ">Finish<% @task.status = true%></div>
-<% else %>
-  <div class="btn btn-primary ">Back to Progress<% @task.status = false%></div>
-<% end %>
-
-
-
