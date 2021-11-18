@@ -2,8 +2,10 @@ Rails.application.routes.draw do
   devise_for :users
   resources :comments
   resources :tasks
-  resources :projects
-  resources :users, only: [:show]
+  resources :projects do
+    post :add_user, on: :member
+  end
+  resources :users
   root 'home#index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

@@ -13,7 +13,7 @@
     <% Comment.all.each do |comment| %>
       <% if comment.task_id == @task.id %>
       <tr>
-        <td><%= link_to User.find(comment.user_id).fullname , user_path(comment.user_id) %></td>
+        <td><%= link_to User.find(comment.user_id).username , user_path(comment.user_id) %></td>
         <td><%= comment.content %></td>
       </tr>
       <% end %>

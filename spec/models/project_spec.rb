@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Project, type: :model do
-  current_user = User.first_or_create!(fullname: 'Ahmed' ,email: 'ae@gmail.com', password: '123123' , password_confirmation: '123123')
+  current_user = User.first_or_create!(username: 'Ahmed' ,email: 'ae@gmail.com', password: '123123' , password_confirmation: '123123')
   it 'Should has a name' do 
     project = Project.new(
       name: '',
