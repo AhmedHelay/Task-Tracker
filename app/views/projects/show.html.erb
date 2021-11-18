@@ -22,6 +22,7 @@
   </div>
 </div>
 <br>
-<%= link_to 'View Tasks', tasks_path(@project) , class: 'btn btn-primary'%>
-<%= link_to 'Edit', edit_project_path(@project) , class: 'btn btn-secondary'%>
+<%= link_to 'Edit Project', edit_project_path(@project) , class: 'btn btn-secondary'%>
 <%= link_to 'Back', projects_path , class: 'btn btn-primary' %>
+<%= render partial: 'tasks/new' , project: @project %>
+<%= render partial: 'tasks/index' , project: @project %>

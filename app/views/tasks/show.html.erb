@@ -22,9 +22,8 @@
   <strong>Deadline at:</strong>
   <%= @task.deadline_at %>
 </p>
-<%= render partial: 'comments/index' , comment: @comment %>
-<br>
 <%= render partial: 'comments/new' %>
+<%= render partial: 'comments/index' , comment: @comment %>
 <br>
 <%= link_to 'Edit Task', edit_task_path(@task), class: 'btn btn-primary'%>
 <%= link_to 'Back', tasks_path , class: 'btn btn-primary' %>

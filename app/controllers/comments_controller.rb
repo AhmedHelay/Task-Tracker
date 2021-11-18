@@ -18,7 +18,6 @@ class CommentsController < ApplicationController
       if @comment.save
         redirect_to task_path(Task.find(@comment.task_id)), notice: "Comment was successfully created."
       end
-    end
   end
 
   private

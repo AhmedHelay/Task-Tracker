@@ -24,15 +24,9 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
 
-    respond_to do |format|
       if @task.save
-        format.html { redirect_to @task, notice: "Task was successfully created." }
-        format.json { render :show, status: :created, location: @task }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
+        redirect_to project_path(@task.project_id), notice: "Task was successfully created."
       end
-    end
   end
 
   # PATCH/PUT /tasks/1 or /tasks/1.json
