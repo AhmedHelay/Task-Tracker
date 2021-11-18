@@ -1,0 +1,16 @@
+p#notice
+  = notice
+h2| Comments
+table.table.table-responsive.table-light.table-hover.table-striped.table-bordered
+  thead.thead-light
+    tr
+      th|  User 
+      th|  Comment 
+  tbody
+    - Comment.all.each do |comment|
+      - if comment.task_id == @task.id
+        tr
+          td
+            = link_to User.find(comment.user_id).username , user_path(comment.user_id)
+          td
+            = comment.content

@@ -1,0 +1,25 @@
+p
+  strong
+    | Project:
+  = Project.find(@task.project_id).name
+p
+  strong
+    | Title:
+  = @task.title
+p
+  strong
+    | Status:
+  = @task.status
+p
+  strong
+    | Description:
+  = @task.description
+p
+  strong
+    | Deadline at:
+  = @task.deadline_at
+= render partial: 'comments/new'
+= render partial: 'comments/index' , comment: @comment
+br
+= link_to 'Edit Task', edit_task_path(@task), class: 'btn btn-primary'
+= link_to 'Back', tasks_path , class: 'btn btn-primary'

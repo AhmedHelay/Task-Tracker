@@ -1,0 +1,12 @@
+p
+  strong
+    |  Username: 
+    = @user.username
+    p
+      p
+        strong
+          |  Email: 
+          = @user.email
+          p
+            = link_to 'View Projects', projects_path ,class: 'btn btn-primary'
+            = link_to 'Edit Profile', edit_user_registration_path ,class: 'btn btn-secondary'

@@ -1,0 +1,21 @@
+= form_with(model: task) do |form|
+  - if task.errors.any?
+    #error_explanation
+      h2
+        = pluralize(task.errors.count, "error")
+        |  prohibited this task from being saved:
+      ul
+        - task.errors.each do |error|
+          li
+            = error.full_message
+  .field.form-group
+    = form.hidden_field :project_id, :value => @project.id
+  .field.form-group
+    = form.text_field :title , class: 'form-control', placeholder: 'title'
+  .field.form-group
+    = form.text_area :description , class: 'form-control', placeholder: 'description'
+  .field.form-group.text-dark
+    = form.datetime_select :deadline_at , class: 'form-control text-dark', placeholder: 'deadline'
+    = form.select :status, ['Not started yet','On progress','On pause','Finished']
+  .actions
+    = form.submit class: 'btn btn-primary'

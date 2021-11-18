@@ -1,20 +1,16 @@
-html
-  head
-    title
-        |Task Tracker
-        body
-            .card.text-center
-            .card-body
-                - if  !user_signed_in?
-                h1.card-title
-                    | Join us now!
-                p.card-text
-                    | Follow links below to start your journey
-                = link_to ' Log In ' , new_user_session_path , class: 'btn btn-primary btn-lg'
-                = link_to ' Sign Up ' , new_user_registration_path , class: 'btn btn-primary btn-lg'
-                - else
-                h1.card-title
-                    | Welcome back!
-                p.card-text
-                    | We are happy to see , Click on the button below to view you projects
-                = link_to ' Projects ' , projects_path , class: 'btn btn-primary btn-lg'
+.card.text-center.text-dark
+  .card-body
+    - if  !user_signed_in?
+      h1.card-title
+        b
+          | Task Tracker
+      = link_to ' Log In ' , new_user_session_path , class: 'btn btn-primary btn-lg'
+      = link_to ' Sign Up ' , new_user_registration_path , class: 'btn btn-primary btn-lg'
+    - else
+      h1.card-title
+        | Welcome back!
+      p.card-text
+        | We are happy to see , Click on the button below to view you projects
+      = link_to ' Projects ' , projects_path , class: 'btn btn-primary btn-lg'
+    br
+    br

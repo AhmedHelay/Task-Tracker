@@ -1,0 +1,16 @@
+= form_with(model: project) do |form|
+  - if project.errors.any?
+    #error_explanation
+      h2
+        = pluralize(project.errors.count, "error")
+        |  prohibited this project from being saved:
+      ul
+        - project.errors.each do |error|
+          li
+            = error.full_message
+  .field.form-group
+    = form.text_field :name , class: 'form-control', placeholder: 'name'
+  .field.form-group
+    = form.text_area :description , class: 'form-control' , placeholder: 'description'
+  .actions
+    = form.submit class: 'btn btn-primary'
