@@ -1,0 +1,9 @@
+.alert.alert-warning.alert-dismissible.fade.show[role="alert"]
+  - flash.each do |name , msg |
+    |  <div class="alert alert-success
+    - name
+    | "> 
+    = msg
+button.close[type="button" data-dismiss="alert" aria-label="Close"]
+  span[aria-hidden="true"]
+    | ×

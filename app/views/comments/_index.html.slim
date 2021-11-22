@@ -1,11 +1,9 @@
-p#notice
-  = notice
-h2| Comments
+h2 Comments
 table.table.table-responsive.table-light.table-hover.table-striped.table-bordered
   thead.thead-light
     tr
-      th|  User 
-      th|  Comment 
+      th User 
+      th Comment 
   tbody
     - Comment.all.each do |comment|
       - if comment.task_id == @task.id

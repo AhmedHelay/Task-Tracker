@@ -58,12 +58,19 @@ class ProjectsController < ApplicationController
   end
 
   def add_user
-
-    puts "String --> #{User.find_by(email: add_user_params[:email]).projects_id}"
     user = User.find_by(email: add_user_params[:email])
-    user.projects_id.push(@project.id)
-    user.save!
-    redirect_to @project
+    if (user == nil)
+        redirect_to @project, notice: "Counld't find user with this email!"
+    else 
+      if !user.projects_id.include? @project.id 
+            user.projects_id.push(@project.id)
+            user.save!
+            redirect_to @project, notice: "User added successfully"
+      else    
+          user.save!
+          redirect_to @project, notice: "User Already added project" 
+      end
+    end
   end 
 
   private
