@@ -33,6 +33,11 @@ class ProjectsController < ApplicationController
         format.json { render json: @project.errors, status: :unprocessable_entity }
       end
     end
+
+    user = User.find(current_user.id)
+    user.projects_id.push(@project.id)
+    user.save!
+    
   end
 
   # PATCH/PUT /projects/1 or /projects/1.json
