@@ -31,9 +31,13 @@ gem 'jquery-rails'
 gem 'simple_form'
 gem 'rubocop', '~> 1.22', '>= 1.22.2'
 gem 'pg', '~> 1.2', '>= 1.2.3'
+
 gem 'devise', '~> 4.8'
-gem "interactor", "~> 3.0"
 gem "slim-rails"
+
+gem 'interactor'
+gem 'sidekiq'
+gem "letter_opener"
 
 
 group :development, :test do

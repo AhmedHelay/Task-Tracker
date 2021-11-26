@@ -25,6 +25,9 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
 
       if @task.save
+        TaskMailer.with(
+          task: @task, project: @project ,user: @user)
+          .task_created.deliver_later
         redirect_to project_path(@task.project_id), notice: "Task was successfully created."
       end
   end

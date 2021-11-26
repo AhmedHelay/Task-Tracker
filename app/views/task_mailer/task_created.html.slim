@@ -1,0 +1,13 @@
+html
+  head
+    meta[content="text/html; charset=UTF-8" http-equiv="Content-Type"]
+  body
+    p User: 
+        = @user.username
+        | Created Task:
+        = @task.title
+        | In Project: 
+        = @project.name
+        br
+    p To check task follow link bellow ->
+        = @url

@@ -28,15 +28,19 @@ class ProjectsController < ApplicationController
       if @project.save
         format.html { redirect_to @project, notice: "Project was successfully created." }
         format.json { render :show, status: :created, location: @project }
+        user = User.find(current_user.id)
+        user.projects_id.push(@project.id)
+        user.save!
+        ProjectMailer.with(
+          project: @project, user: current_user)
+          .project_created.deliver_later
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @project.errors, status: :unprocessable_entity }
       end
     end
 
-    user = User.find(current_user.id)
-    user.projects_id.push(@project.id)
-    user.save!
+
     
   end
 
@@ -66,15 +70,15 @@ class ProjectsController < ApplicationController
     user = User.find_by(email: add_user_params[:email])
     if (user == nil)
         redirect_to @project, notice: "Counld't find user with this email!"
-    else 
-      if !user.projects_id.include? @project.id 
+    elsif !user.projects_id.include? @project.id 
             user.projects_id.push(@project.id)
             user.save!
+            ProjectMailer.with(
+              user: user,project: @project)
+              .add_user_to_project.deliver_later
             redirect_to @project, notice: "User added successfully"
-      else    
-          user.save!
+    else    
           redirect_to @project, notice: "User Already added project" 
-      end
     end
   end 
 
