@@ -1,20 +1,21 @@
 class TaskMailer < ApplicationMailer
-    before_action :get_params , only: %i[task_created]
-
-    def task_created
+    def task_created(task,project,user)
+        set_params(task,project,user)
         mail(to: @user.email, 
-            subject: "You created Task #{@task.title}  in project #{@project.name} successfully")
+            subject: "Task created successfully")
         User.all.each do |u|
             if u.projects_id.include?(@project.id)
-                mail(to: u , "User #{@user.id}  added task: #{@task.title} to project #{@project.name}")
+                mail(to: u.email , subject: "Task added to project successfully")
+            end
+        end
     end
 
     private
 
-    def get_params
-        @task  = params[:task]
-        @project = params[:project]
-        @user  = params[:user]
+    def set_params(task,project,user)
+        @task  = task
+        @project = project
+        @user  = user
         @url  = "http://localhost:3000/tasks/#{@task.id}"
     end
 end

@@ -22,4 +22,4 @@ p
 = render partial: 'comments/index' , comment: @comment
 br
 = link_to 'Edit Task', edit_task_path(@task,@project), class: 'btn btn-primary'
-= link_to 'Back', projects_path(@project) , class: 'btn btn-primary'
+= link_to 'Back', project_path(@task.project_id) , class: 'btn btn-primary'

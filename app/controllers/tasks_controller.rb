@@ -23,16 +23,14 @@ class TasksController < ApplicationController
   # POST /tasks or /tasks.json
   def create
     @task = Task.new(task_params)
-
-      if @task.save
-        TaskMailer.with(
-          task: @task, project: @project ,user: @user)
-          .task_created.deliver_later
+      if @task.save!
+        CreateTask.call(task: @task,current_user: current_user)
         redirect_to project_path(@task.project_id), notice: "Task was successfully created."
+      else
+        redirect_to project_path(@task.project_id), notice: "Task Creation Failed."  
       end
   end
 
-  # PATCH/PUT /tasks/1 or /tasks/1.json
   def update
     respond_to do |format|
       if @task.update(task_params)
@@ -45,22 +43,21 @@ class TasksController < ApplicationController
     end
   end
 
-  # DELETE /tasks/1 or /tasks/1.json
   def destroy
+    id_project = @task.project_id
     @task.destroy
     respond_to do |format|
-      format.html { redirect_to tasks_url, notice: "Task was successfully destroyed." }
+      format.html { redirect_to project_path(id_project), notice: "Task was successfully destroyed." }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_task
       @task = Task.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def task_params
       params.require(:task).permit(:id, :title, :description, :deadline_at, :project_id, :status)
     end

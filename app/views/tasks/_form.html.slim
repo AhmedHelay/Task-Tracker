@@ -9,7 +9,7 @@
           li
             = error.full_message
   .field.form-group
-    = form.hidden_field :project_id
+    = form.hidden_field :project_id , :value => @project.id
   .field.form-group
     = form.text_field :title , class: 'form-control', placeholder: 'title'
   .field.form-group

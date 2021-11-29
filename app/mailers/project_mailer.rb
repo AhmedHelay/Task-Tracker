@@ -1,31 +1,36 @@
-class ProjectMailer < ApplicationMailer
-    before_action :get_params , only: %i[project_created add_user_to_project]
+class ProjectMailer < ApplicationMailer    
 
-    def project_created
-        mail(to: @user.email, subject: 'You created project successfully')
+    
+    def project_created(project,user)
+        set(project,user)
+        mail(to: @user.email, subject: 'Project created successfully')
     end
 
-    def project_edited 
-        mail(to: @user.email, subject: 'You created project successfully')
-        send_to_other_users(subject: "User #{@user.id} edited project #{@project.name}")
+    def project_edited(project, user)
+        set(project,user)
+        mail(to: @user.email, subject: 'You Updated project successfully')
+        send_to_other_users(subject: "Project updated")
     end
 
-    def add_user_to_project
-        mail(to: @user.email, subject: "You were added to project #{@project.name}")    
-        send_to_other_users(subject: "User #{@user.id}  was added to project #{@project.name}")
+    def add_user_to_project(project,user)
+        set(project,user)
+        mail(to: @user.email, subject: "You were added to project")    
+        send_to_other_users(subject: "User joined project")
     end
 
     private
 
-    def get_params
-        @project  = params[:project]
-        @user  = params[:user]
+    def set(project,user)
+        @project = project 
+        @user = user
         @url  = "http://localhost:3000/projects/#{@project.id}"
     end
 
-    def send_to_other_users
+    def send_to_other_users(subject)
         User.all.each do |u|
             if u.projects_id.include?(@project.id) && u != @user
-                mail(to: u , :subject)
+                mail(to: u.email , subject: subject)
+            end
+        end
     end
 end

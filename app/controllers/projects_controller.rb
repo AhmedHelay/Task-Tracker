@@ -18,33 +18,24 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
+  #  ProjectMailer.project_edited(@project,current_user).deliver
   end
 
   # POST /projects or /projects.json
   def create
-    @project = Project.new(project_params)
+    @project = create_project.project
 
     respond_to do |format|
-      if @project.save
+      if create_project.success?
         format.html { redirect_to @project, notice: "Project was successfully created." }
         format.json { render :show, status: :created, location: @project }
-        user = User.find(current_user.id)
-        user.projects_id.push(@project.id)
-        user.save!
-        ProjectMailer.with(
-          project: @project, user: current_user)
-          .project_created.deliver_later
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @project.errors, status: :unprocessable_entity }
       end
     end
-
-
-    
   end
 
-  # PATCH/PUT /projects/1 or /projects/1.json
   def update
     respond_to do |format|
       if @project.update(project_params)
@@ -56,9 +47,12 @@ class ProjectsController < ApplicationController
       end
     end
   end
-
-  # DELETE /projects/1 or /projects/1.json
+                
   def destroy
+    User.all.each do |user|
+      user.projects_id.delete(@project.id)
+      user.save!
+    end
     @project.destroy
     respond_to do |format|
       format.html { redirect_to projects_url, notice: "Project was successfully destroyed." }
@@ -70,28 +64,29 @@ class ProjectsController < ApplicationController
     user = User.find_by(email: add_user_params[:email])
     if (user == nil)
         redirect_to @project, notice: "Counld't find user with this email!"
-    elsif !user.projects_id.include? @project.id 
-            user.projects_id.push(@project.id)
-            user.save!
-            ProjectMailer.with(
-              user: user,project: @project)
-              .add_user_to_project.deliver_later
-            redirect_to @project, notice: "User added successfully"
-    else    
-          redirect_to @project, notice: "User Already added project" 
+    else
+        user.projects_id.push(@project.id).uniq!
+        user.save!
+        ProjectMailer.add_user_to_project(@project,current_user).deliver
+        redirect_to @project, notice: "User added successfully"
     end
   end 
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
+    def create_project
+        @create_project ||= 
+          CreateProject.call(project_params: project_params,current_user: current_user)
+    end
+    
     def set_project
       @project = Project.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def project_params
       params.require(:project).permit(:name, :description ).merge(user_id: current_user.id)
     end
+    
     def require_login
       unless current_user
         redirect_to new_user_registration_path
