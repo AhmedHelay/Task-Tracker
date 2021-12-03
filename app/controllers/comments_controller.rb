@@ -1,35 +1,49 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: %i[ show edit update destroy ]
   
-  # GET /comments or /comments.json
   def index
     @comments = Comment.all
   end
 
-  # GET /comments/new
+  def edit 
+    @task = Task.find_by(params[:task_id]) 
+  end
+
   def new
     @comment = Comment.new
   end
 
 
-  # POST /comments or /comments.json
   def create
-    @comment = Comment.new(comment_params)
-      if @comment.save
-        redirect_to task_path(Task.find(@comment.task_id)), notice: "Comment was successfully created."
+    @comment ||= CreateComment.call(comment_params: comment_params, current_user: current_user)
+      if @comment.save!
+        redirect_to task_path(@comment.task_id), notice: "Comment created successfully"
+      else
+        redirect_to task_path(comment_params[:task_id]), notice: "Comment create failed"
+      end
+  end
+
+  def update
+      @comment = UpdateComment.call(
+        comment_params: comment_params.merge(:id => @comment.id),
+        current_user: current_user)
+      if @comment.save!
+        redirect_to task_path(@comment.task_id), notice: "Comment updated successfully"
+      else
+        redirect_to task_path(comment_params[:task_id]), notice: "Comment update failed"
       end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+    
     def set_comment
       @comment = Comment.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def comment_params
-      params.require(:comment).permit(:task_id, :content).merge(user_id: current_user.id)
+      params.require(:comment).permit(:task_id, :content)
     end
+
     before_action :require_login 
     def require_login
       unless current_user
