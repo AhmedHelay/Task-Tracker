@@ -1,4 +1,4 @@
-class CreateProject
+class UserToProject 
     class SendNotifications
         include Interactor
 
@@ -12,11 +12,11 @@ class CreateProject
         private 
 
         def send_email_notification
-            ProjectMailer.create_project(project, current_user).deliver
+            ProjectMailer.add_user_to_project(project,current_user).deliver
         end
 
         def create_avtivity
-            RegisterActivityJob.perform_now(current_user.id, "Project Created", project.id, "Project")
+            RegisterActivityJob.perform_now(current_user.id, "User added", project.id, "Project")
         end
     end
 end
