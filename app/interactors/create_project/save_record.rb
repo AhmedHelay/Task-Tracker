@@ -13,7 +13,7 @@ class CreateProject
       private
   
       def project
-        @project ||= Project.new(prepared_project_params)
+        @project ||= Project.create(prepared_project_params)
       end
 
       def add_project_to_user

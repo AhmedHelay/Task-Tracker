@@ -2,54 +2,43 @@ class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
   before_action :require_login 
   
-  # GET /tasks or /tasks.json
   def index
     @tasks = Task.all
   end
 
-  # GET /tasks/1 or /tasks/1.json
   def show
   end
 
-  # GET /tasks/new
   def new
     @task = Task.new
   end
 
-  # GET /tasks/1/edit
   def edit
+    @project = Project.find_by(id: @task.project_id)
   end
 
-  # POST /tasks or /tasks.json
   def create
-    @task = Task.new(task_params)
+    @task = CreateTask.call(task_params: task_params)
       if @task.save!
-        CreateTask.call(task: @task,current_user: current_user)
-        redirect_to project_path(@task.project_id), notice: "Task was successfully created."
+        redirect_to project_path(@task.project_id), notice: "Task created successfully "
       else
-        redirect_to project_path(@task.project_id), notice: "Task Creation Failed."  
+        redirect_to project_path(@task.project_id), notice: "Task create failed"  
       end
   end
 
   def update
-    respond_to do |format|
-      if @task.update(task_params)
-        format.html { redirect_to @task, notice: "Task was successfully updated." }
-        format.json { render :show, status: :ok, location: @task }
+      UpdateTask.call(task_params: task_params)
+      if @task.save!
+        redirect_to project_path(@task.project_id), notice: "Task create failed"  
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
+        redirect_to edit_task_path(@task), notice: "Task create failed"  
       end
-    end
   end
 
   def destroy
-    id_project = @task.project_id
-    @task.destroy
-    respond_to do |format|
-      format.html { redirect_to project_path(id_project), notice: "Task was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    id = @task.project_id
+    DestroyTask.call(task: @task, current_user: current_user)
+    redirect_to project_path(id), notice: "Task destroyed successfully"
   end
 
   private
@@ -66,6 +55,5 @@ class TasksController < ApplicationController
       unless current_user
         redirect_to new_user_registration_path
         end
-    end
-        
+    end  
 end

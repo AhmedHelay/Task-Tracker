@@ -1,5 +1,6 @@
 class CreateTask
-    include Interactor::Organizer
-  
-    organize CreateTask::SendNotifications
+	include Interactor::Organizer
+
+	organize 	CreateTask::SaveRecord,
+					 	CreateTask::SendNotifications
 end
