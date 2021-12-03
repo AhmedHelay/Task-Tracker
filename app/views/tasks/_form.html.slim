@@ -9,11 +9,11 @@
           li
             = error.full_message
   .field.form-group
-    = form.hidden_field :project_id
+    = form.hidden_field :project_id , :value => @project.id
   .field.form-group
     = form.text_field :title , class: 'form-control', placeholder: 'title'
   .field.form-group
-    = form.text_area :description , class: 'form-control', placeholder: 'description'
+    = form.text_area :description , class: 'form-control', placeholder: 'description' , defaultValue: 'Empty'
   .field.form-group.text-dark
     = form.datetime_select :deadline_at , class: 'form-control text-dark', placeholder: 'deadline'
     = form.select :status, ['Not started yet','On progress','On pause','Finished']

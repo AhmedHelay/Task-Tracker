@@ -1,12 +1,9 @@
-h1
-  | Projects
+h1 Projects
 table.table.table-responsive.table-light.table-hover.table-striped.table-bordered
   thead.thead-light
     tr
-      th
-        | Name
-      th
-        | Description
+      th Name
+      th Description
       th[colspan="3"]
   tbody
     - @current_user.projects_id.each do |p_id|

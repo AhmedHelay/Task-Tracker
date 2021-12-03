@@ -4,6 +4,7 @@ table.table.table-responsive.table-light.table-hover.table-striped.table-bordere
     tr
       th User 
       th Comment 
+      th[colspan="1"]
   tbody
     - Comment.all.each do |comment|
       - if comment.task_id == @task.id
@@ -12,3 +13,5 @@ table.table.table-responsive.table-light.table-hover.table-striped.table-bordere
             = link_to User.find(comment.user_id).username , user_path(comment.user_id)
           td
             = comment.content
+          td
+            = link_to 'Edit Comment', edit_comment_path(comment), class: 'btn btn-secondary'

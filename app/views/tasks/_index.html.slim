@@ -1,16 +1,11 @@
-h1
-  | Tasks
+h1 Tasks
 table.table.table-responsive.table-light.table-striped.table-bordered
   thead.thead-light
     tr
-      th
-        | Title
-      th
-        | Description
-      th
-        | Deadline at
-      th
-        | Status
+      th Title
+      th Description
+      th Deadline at
+      th Status
       th[colspan="2"]
   tbody
     - Task.all.each do |task|

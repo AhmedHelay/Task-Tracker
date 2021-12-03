@@ -1,0 +1,16 @@
+p
+  strong
+    | User:
+  = @user.username
+p
+  strong
+    | Created Task:
+  = @task.title
+p 
+  strong 
+    | In Project 
+  = @project.name
+p
+  strong
+    | To check Task follow link:
+  = @url

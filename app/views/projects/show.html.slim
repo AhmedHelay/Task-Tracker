@@ -1,16 +1,14 @@
 .card.text-dark
   .card-header
     h3
-      strong
-        | Project Name
+      strong Project Name
   .card-body
     h4
       = @project.name
   br
   .card-header
     h3
-      strong
-        | Description
+      strong Description
   .card-body
     h4
       = @project.description
@@ -19,8 +17,7 @@ br
 .card.text-dark
   .card-header
     h3
-      strong
-        | Add User to Project
+      strong Add User to Project
   .card-body
     = simple_form_for :user, url: add_user_project_path(@project), method: :post do |f|
       = f.error_notification
