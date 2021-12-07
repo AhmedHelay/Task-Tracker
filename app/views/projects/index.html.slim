@@ -6,8 +6,7 @@ table.table.table-responsive.table-light.table-hover.table-striped.table-bordere
       th Description
       th[colspan="3"]
   tbody
-    - @current_user.projects_id.each do |p_id|
-      - project = Project.find(p_id);
+    - Project.all.each do |project|
       tr
         td
           = link_to project.name , project

@@ -19,7 +19,7 @@ class ProjectsController < ApplicationController
   def create
     @project ||= 
     CreateProject.call(current_user: current_user, project_params: project_params)
-      if @project.success?
+      if @project.save?
         redirect_to projects_url, notice: "Project created successfully"
       else
         redirect_to projects_url, notice: "Project creation failed failed"
@@ -31,21 +31,21 @@ class ProjectsController < ApplicationController
       current_user: current_user,
       project_params: project_params.merge(:id => @project.id)
     )
-      if @project.success?
-        redirect_to projects_url, notice: "Project was successfully updated."
+      if @project.save?
+        redirect_to projects_url, notice: "Project was successfully updated"
       else
-        redirect_to edit_project_url, status: :unprocessable_entity
+        redirect_to projects_url, notice: "Project update failed"
       end
   end
                 
   def destroy
     DestroyProject.call(current_user: current_user, id: @project.id)
-    redirect_to projects_url, notice: "Project destroyed successfully "
+    redirect_to projects_url, notice: "Project destroyed successfully"
   end
 
   def add_user
-    UserToProject.call(add_user_params: add_user_params)
-    if user.save!
+    result = AddProjectToUser.call(email: add_user_params[:email], project_id: @project.id)
+    if result.success?
         redirect_to @project, notice: "Counld't find user with this email!"
     else
         redirect_to @project, notice: "User added successfully"
