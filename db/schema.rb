@@ -10,28 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 202111189765965) do
+ActiveRecord::Schema.define(version: 2021_12_07_005313) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "activities", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "kind"
     t.string "target_type"
     t.integer "target_id"
-    t.string "kind"
-    t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
-  
+
   create_table "comments", force: :cascade do |t|
     t.integer "user_id"
     t.integer "task_id"
     t.text "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["task_id"], name: "index_comments_on_task_id"
-    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "projects", force: :cascade do |t|
@@ -39,21 +37,27 @@ ActiveRecord::Schema.define(version: 202111189765965) do
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "user_id"
   end
 
   create_table "tasks", force: :cascade do |t|
     t.integer "project_id"
     t.string "title"
     t.text "description"
+    t.string "status"
     t.datetime "deadline_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "status"
-    t.index ["project_id"], name: "index_tasks_on_project_id"
+  end
+
+  create_table "user_projects", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "project_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
+    t.string "username"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -61,9 +65,6 @@ ActiveRecord::Schema.define(version: 202111189765965) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "username"
-    t.integer "projects_id", default: [], array: true
-    t.string "role"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

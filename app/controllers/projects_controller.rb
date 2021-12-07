@@ -3,7 +3,11 @@ class ProjectsController < ApplicationController
   before_action :require_login 
   
   def index
-    @projects = Project.all
+    ids = []
+    UserProject.where(user_id: current_user.id).each do |userProject|
+        ids << userProject.project_id
+    end
+    @projects = Project.where(id: ids)
   end
 
   def show
@@ -17,9 +21,9 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @project ||= 
-    CreateProject.call(project_params: project_params,current_user: current_user)
-      if @project.success?
+    @project = 
+    CreateProject.call(current_user: current_user, project_params: project_params)
+      if @project.save!
         redirect_to projects_url, notice: "Project created successfully"
       else
         redirect_to projects_url, notice: "Project creation failed failed"
@@ -28,23 +32,24 @@ class ProjectsController < ApplicationController
 
   def update
     @project = UpdateProject.call(
-      project_params: project_params.merge(:id => @project.id),
-      current_user: current_user)
-      if @project.success?
-        redirect_to @project, notice: "Project was successfully updated."
+      current_user: current_user,
+      project_params: project_params.merge(:id => @project.id)
+    )
+      if @project.save!
+        redirect_to projects_url, notice: "Project was successfully updated"
       else
-        redirect_to edit_project_url, status: :unprocessable_entity
+        redirect_to projects_url, notice: "Project update failed"
       end
   end
                 
   def destroy
-    DestroyProject.call(@project)
-    redirect_to projects_url, notice: "Project destroyed successfully "
+    DestroyProject.call(current_user: current_user, id: @project.id)
+    redirect_to projects_url, notice: "Project destroyed successfully"
   end
 
   def add_user
-    UserToProject.call(add_user_params: add_user_params)
-    if user.save!
+    result = AddProjectToUser.call(email: add_user_params[:email], project_id: @project.id)
+    if result.success?
         redirect_to @project, notice: "Counld't find user with this email!"
     else
         redirect_to @project, notice: "User added successfully"

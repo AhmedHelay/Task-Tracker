@@ -12,11 +12,11 @@ class CreateProject
         private 
 
         def send_email_notification
-            ProjectMailer.project_created(project, current_user).deliver
+            ProjectMailer.create_project(project, current_user).deliver
         end
 
         def create_avtivity
-            RegisterActivityJob.perform_now(current_user.id, "project_created", project.id, "Project")
+            RegisterActivityJob.perform_now(current_user.id, "Project Created", project.id, "Project")
         end
     end
 end
