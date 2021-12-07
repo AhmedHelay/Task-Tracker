@@ -2,7 +2,7 @@ class DestroyTask
     class SendNotifications
         include Interactor
 
-        delegate :current_user, :task , :id, to: :context
+        delegate :current_user, :id, to: :context
 
         def call
             create_avtivity

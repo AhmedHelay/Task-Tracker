@@ -18,17 +18,18 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = CreateTask.call(task_params: task_params)
-      if @task.save!
-        redirect_to project_path(@task.project_id), notice: "Task created successfully "
+    @task ||=
+    CreateTask.call(current_user: current_user,task_params: task_params)
+      if @task.success!
+        redirect_to project_path(task_params[:project_id]), notice: "Task created successfully "
       else
-        redirect_to project_path(@task.project_id), notice: "Task create failed"  
+        redirect_to project_path(task_params[:project_id]), notice: "Task create failed"  
       end
   end
 
   def update
       UpdateTask.call(task_params: task_params)
-      if @task.save!
+      if @task.success!
         redirect_to project_path(@task.project_id), notice: "Task create failed"  
       else
         redirect_to edit_task_path(@task), notice: "Task create failed"  
@@ -37,7 +38,7 @@ class TasksController < ApplicationController
 
   def destroy
     id = @task.project_id
-    DestroyTask.call(task: @task, current_user: current_user)
+    DestroyTask.call(id: @task.id, current_user: current_user)
     redirect_to project_path(id), notice: "Task destroyed successfully"
   end
 

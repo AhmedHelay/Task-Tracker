@@ -5,7 +5,7 @@ module Mutations
     type Types::TaskType
 
     def resolve(**params)
-      ::DestroyTask.call(task: Task.find(params[:id]))
+      ::DestroyTask.call(id: params[:id])
     end
   end
 end

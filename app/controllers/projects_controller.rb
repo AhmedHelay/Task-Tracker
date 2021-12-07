@@ -18,7 +18,7 @@ class ProjectsController < ApplicationController
 
   def create
     @project ||= 
-    CreateProject.call(project_params: project_params,current_user: current_user)
+    CreateProject.call(current_user: current_user, project_params: project_params)
       if @project.success?
         redirect_to projects_url, notice: "Project created successfully"
       else
@@ -28,17 +28,18 @@ class ProjectsController < ApplicationController
 
   def update
     @project = UpdateProject.call(
-      project_params: project_params.merge(:id => @project.id),
-      current_user: current_user)
+      current_user: current_user,
+      project_params: project_params.merge(:id => @project.id)
+    )
       if @project.success?
-        redirect_to @project, notice: "Project was successfully updated."
+        redirect_to projects_url, notice: "Project was successfully updated."
       else
         redirect_to edit_project_url, status: :unprocessable_entity
       end
   end
                 
   def destroy
-    DestroyProject.call(@project)
+    DestroyProject.call(current_user: current_user, id: @project.id)
     redirect_to projects_url, notice: "Project destroyed successfully "
   end
 

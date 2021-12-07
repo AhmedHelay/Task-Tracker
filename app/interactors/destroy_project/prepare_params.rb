@@ -2,12 +2,11 @@ class DestroyProject
   class PrepareParams
     include Interactor
 
-    delegate :id , :project_params, :project, to: :context
+    delegate :id , :project, to: :context
       
       def call
-        context.fail!(error: "Project doesn't exist") if Project.find_by(id: :id).nil?       
-        id = project.id
-        project = Project.find(project_params[:id])
+        context.project = Project.find(id);
+        context.fail!(error: "Project doesn't exist") if project.nil?       
       end
   end
 end

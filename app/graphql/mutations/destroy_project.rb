@@ -6,7 +6,7 @@ module Mutations
     type Types::ProjectType
 
     def resolve(**params)
-        ::DestroyProject.call(project_params: params[:id])
+        ::DestroyProject.call(id: params[:id])
     end 
   end
 end
