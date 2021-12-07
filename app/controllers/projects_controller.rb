@@ -3,7 +3,11 @@ class ProjectsController < ApplicationController
   before_action :require_login 
   
   def index
-    @projects = Project.all
+    ids = []
+    UserProject.where(user_id: current_user.id).each do |userProject|
+        ids << userProject.project_id
+    end
+    @projects = Project.where(id: ids)
   end
 
   def show
@@ -17,9 +21,9 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @project ||= 
+    @project = 
     CreateProject.call(current_user: current_user, project_params: project_params)
-      if @project.save?
+      if @project.save!
         redirect_to projects_url, notice: "Project created successfully"
       else
         redirect_to projects_url, notice: "Project creation failed failed"
@@ -31,7 +35,7 @@ class ProjectsController < ApplicationController
       current_user: current_user,
       project_params: project_params.merge(:id => @project.id)
     )
-      if @project.save?
+      if @project.save!
         redirect_to projects_url, notice: "Project was successfully updated"
       else
         redirect_to projects_url, notice: "Project update failed"
