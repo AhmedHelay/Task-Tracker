@@ -1,6 +1,7 @@
 module Types
   class UserType < Types::BaseObject
     field :id, ID, null: false
+    field :username, String, null: true
     field :email, String, null: false
     field :encrypted_password, String, null: false
     field :reset_password_token, String, null: true
@@ -8,8 +9,5 @@ module Types
     field :remember_created_at, GraphQL::Types::ISO8601DateTime, null: true
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
-    field :username, String, null: true
-    field :projects_id, [Integer], null: true
-    field :role, String, null: true
   end
 end
