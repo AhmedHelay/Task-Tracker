@@ -5,7 +5,7 @@ class Activity < ApplicationRecord
         "Comment Created","Comment Updated"]
 
     belongs_to :user
-    belongs_to :target, polymorphic: true
+    belongs_to :target, polymorphic: true 
   
     validates :user_id, presence: true
     validates :kind, inclusion: { in: ALLOWED_KINDS }

@@ -5,13 +5,13 @@ class CreateTask
     delegate :task_params, :task, to: :context
 
     def call
-      context.task = task
+      context.task = create_task
       context.fail!(error: "Invalid data") unless task.save!
     end
 
     private
 
-    def task
+    def create_task
       Task.new(task_params)
     end
   end
