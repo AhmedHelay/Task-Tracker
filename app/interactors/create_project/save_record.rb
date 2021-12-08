@@ -5,15 +5,15 @@ class CreateProject
       delegate :project_params, :current_user, :project, to: :context
   
       def call
-        context.project = project
-        context.fail!(error: "Invalid data") unless project.save 
+        context.project = create_project
+        context.fail!(error: "Invalid data") unless project.save!
         AddProjectToUser.call(email: current_user.email,project_id: project.id)
       end
   
       private
   
-      def project
-        project = Project.create(project_params)
+      def create_project
+        Project.new(project_params)
       end
     end
   end

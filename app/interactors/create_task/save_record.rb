@@ -12,7 +12,7 @@ class CreateTask
     private
 
     def task
-      Task.create(task_params)
+      Task.new(task_params)
     end
   end
 end
