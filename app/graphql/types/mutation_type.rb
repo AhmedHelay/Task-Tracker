@@ -1,6 +1,9 @@
 module Types
   class MutationType < Types::BaseObject
     
+    # UserProject
+    field :add_user_to_project, mutation: Mutations::AddUserToProject
+    
     #Project
     field :create_project, mutation: Mutations::CreateProject
     field :update_project, mutation: Mutations::UpdateProject
