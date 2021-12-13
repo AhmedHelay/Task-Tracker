@@ -1,0 +1,15 @@
+.card.text-dark
+  .card-header
+    h2 Edit User
+  .card-body
+    = simple_form_for(@user) do |f|
+      = f.error_notification
+      .field.form-group
+        .form-inputs
+          = f.input :username, required: true, placeholder: @user.username
+        .form-inputs
+          = f.input :email, required: true, autofocus: true
+        .field.form-group
+          = f.input :password,    required: false, autofocus: true
+      .form-actions
+        = f.button :submit, "Update", class: 'btn btn-primary'

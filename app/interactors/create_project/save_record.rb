@@ -6,7 +6,8 @@ class CreateProject
   
       def call
         context.project = create_project
-        context.fail!(error: "Invalid data") unless project.save!
+        context.fail!(error: "Invalid data") unless project.save! 
+        
         AddProjectToUser.call(email: current_user.email,project_id: project.id)
       end
   
@@ -15,5 +16,5 @@ class CreateProject
       def create_project
         Project.new(project_params)
       end
-    end
   end
+end

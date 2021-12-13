@@ -1,0 +1,18 @@
+h2 Sign up
+= simple_form_for(@user) do |f|
+  = f.error_notification
+  .form-inputs
+      = f.input :username,
+          required: true,
+          autofocus: true,
+          null: false
+      = f.input :email,
+          required: true,
+          autofocus: true,
+          null: false
+      = f.input :password,
+          required: true,
+          null: false
+  .form-actions
+      = f.button :submit, "Sign up" , class: 'btn btn-primary'
+        

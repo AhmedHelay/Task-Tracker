@@ -11,10 +11,8 @@ class AddProjectToUser
     private
 
     def add_project_to_user 
-      if  UserProject.exists?(user_id: user.id, project_id: project_id) 
-        context.fail!(erorr: "User already member of project")  
-      end
-      UserProject.create(user_id: user.id, project_id: project_id)    
+      user_project = UserProject.find_or_create_by(user_id: user.id, project_id: project_id)
+      user_project.save!
     end
   end
 end

@@ -1,10 +1,6 @@
 class ApplicationController < ActionController::Base    
-    before_action :configure_permitted_parameters, if: :devise_controller?
-    add_flash_types :info , :danger , :warning , :success
-    protected
+  include Authentication
+  #include Authorization
   
-    def configure_permitted_parameters
-      devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :email, :password])
-      devise_parameter_sanitizer.permit(:account_update, keys: [:username, :email, :password, :current_password])
-    end
-  end
+  add_flash_types :info , :danger , :warning , :success
+end

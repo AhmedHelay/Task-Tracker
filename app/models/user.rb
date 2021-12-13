@@ -1,9 +1,11 @@
 class User < ApplicationRecord
   has_many :projects
   
+  has_secure_password
+  
   validates :username, presence:  true
-  # Include default devise modules. Others available are:
-  # :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+  validates :email, presence: true, 
+                    uniqueness: true,
+                    format: { with: /\A[^@\s]+@[^@\s]+\z/, message: 'Invalid email' }
+  validates :password, presence:  true
 end

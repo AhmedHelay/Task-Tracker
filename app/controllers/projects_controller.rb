@@ -1,13 +1,13 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: %i[show edit update destroy add_user]
-  before_action :require_login 
-  
+  before_action :authenticate_current_user!
+
   def index
-    ids = []
-    UserProject.where(user_id: current_user.id).each do |userProject|
-        ids << userProject.project_id
-    end
-    @projects = Project.where(id: ids)
+    @projects =
+    Project.where(
+        id: UserProject
+        .where(user_id: current_user.id)
+        .map{|up| up.project_id})
   end
 
   def show
@@ -64,12 +64,6 @@ class ProjectsController < ApplicationController
 
     def project_params
       params.require(:project).permit(:name, :description )
-    end
-    
-    def require_login
-      unless current_user
-        redirect_to new_user_registration_path
-        end
     end
 
     def add_user_params

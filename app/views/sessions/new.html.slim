@@ -1,0 +1,8 @@
+h2 Log in
+= simple_form_for @user, url: session_path do |f|
+    = f.error :base
+    .form-inputs
+      = f.input :email
+      = f.input :password  
+    .form-actions
+      = f.button :submit, "Log in" ,class: 'btn btn-primary btn-sm '

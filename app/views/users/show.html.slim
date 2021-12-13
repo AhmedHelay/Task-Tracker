@@ -1,12 +1,9 @@
 p
-  strong
-    |  Username: 
-    = @user.username
-    p
-      p
-        strong
-          |  Email: 
-          = @user.email
-          p
-            = link_to 'View Projects', projects_path ,class: 'btn btn-primary'
-            = link_to 'Edit Profile', edit_user_registration_path ,class: 'btn btn-secondary'
+  strong Username: 
+  = @user.username
+p
+  strong Email: 
+  = @user.email
+p
+    = link_to 'View Projects', projects_path ,class: 'btn btn-primary'
+    = link_to 'Edit Profile', edit_user_path(current_user.id) ,class: 'btn btn-secondary'

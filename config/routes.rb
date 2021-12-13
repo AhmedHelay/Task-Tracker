@@ -3,12 +3,11 @@ Rails.application.routes.draw do
     mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql"
   end
   post "/graphql", to: "graphql#execute"
-  devise_for :users
+  resources :users
   resources :comments
   resources :tasks
+  resource :session, only: %i[new create destroy]
   resources :projects do
     post :add_user, on: :member
   end
-  resources :users
-  root 'home#index'
 end

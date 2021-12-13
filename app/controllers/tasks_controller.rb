@@ -1,12 +1,13 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
-  before_action :require_login 
+  before_action :authenticate_current_user!
   
   def index
-    @tasks = Task.all
+    @tasks = Task.where(project_id: @project.id)
   end
 
   def show
+    @comment = Comment.new
   end
 
   def new
