@@ -1,7 +1,9 @@
-class UpdateProject
-	include Interactor::Organizer
+# frozen_string_literal: true
 
-	organize 	UpdateProject::PrepareParams,
-					 	UpdateProject::SaveRecord,
-						UpdateProject::SendNotifications
+class UpdateProject
+  include Interactor::Organizer
+
+  organize UpdateProject::PrepareParams,
+           UpdateProject::SaveRecord,
+           UpdateProject::SendNotifications
 end

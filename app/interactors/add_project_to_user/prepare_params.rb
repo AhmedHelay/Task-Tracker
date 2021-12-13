@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddProjectToUser
   class PrepareParams
     include Interactor
@@ -6,6 +8,7 @@ class AddProjectToUser
 
     def call
       context.user = User.find_by(email: email)
-      context.fail!(error: "User not found") unless !user.nil? end
+      context.fail!(error: 'User not found') if user.nil?
+    end
   end
 end

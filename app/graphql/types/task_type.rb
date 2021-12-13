@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 module Types
   class TaskType < Types::BaseObject
     field :id, ID, null: false
     field :title, String, null: true
-    field :project_id,Integer, null: false
+    field :project_id, Integer, null: false
     field :description, String, null: true
     field :status, String, null: true
     field :project, Types::ProjectType, null: false

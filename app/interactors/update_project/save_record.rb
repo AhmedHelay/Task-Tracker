@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UpdateProject
   class SaveRecord
     include Interactor
@@ -5,9 +7,7 @@ class UpdateProject
     delegate :project_params, :project, to: :context
 
     def call
-      unless project.update(project_params)
-        context.fail!(error: "Invalid data")
-      end
+      context.fail!(error: 'Invalid data') unless project.update(project_params)
     end
   end
 end

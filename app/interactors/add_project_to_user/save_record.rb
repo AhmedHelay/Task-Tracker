@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddProjectToUser
   class SaveRecord
     include Interactor
@@ -10,7 +12,7 @@ class AddProjectToUser
 
     private
 
-    def add_project_to_user 
+    def add_project_to_user
       user_project = UserProject.find_or_create_by(user_id: user.id, project_id: project_id)
       user_project.save!
     end

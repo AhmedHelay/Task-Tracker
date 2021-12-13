@@ -1,6 +1,8 @@
-class DestroyProject
-	include Interactor::Organizer
+# frozen_string_literal: true
 
-	organize  DestroyProject::PrepareParams,
-						DestroyProject::SaveRecord
+class DestroyProject
+  include Interactor::Organizer
+
+  organize DestroyProject::PrepareParams,
+           DestroyProject::SaveRecord
 end

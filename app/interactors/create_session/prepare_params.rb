@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateSession
   class PrepareParams
     include Interactor
@@ -11,9 +13,9 @@ class CreateSession
     private
 
     def prepare_current_user
-        context.authenticated_user= User.find_by(
-          email: session_params[:email]
-        )&.authenticate(session_params[:password])
+      context.authenticated_user = User.find_by(
+        email: session_params[:email]
+      )&.authenticate(session_params[:password])
     end
   end
 end

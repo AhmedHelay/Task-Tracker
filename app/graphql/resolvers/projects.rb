@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 module Resolvers
   class Projects < Resolvers::Base
     type [Types::ProjectType], null: false
 
-    def resolve(**params)
+    def resolve(**_params)
       ::Project.all
     end
   end

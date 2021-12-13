@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UpdateTask
   class SaveRecord
     include Interactor
@@ -5,9 +7,7 @@ class UpdateTask
     delegate :task_params, :task, to: :context
 
     def call
-      unless task.update(task_params)
-        context.fail!(error: "Invalid data")
-      end
+      context.fail!(error: 'Invalid data') unless task.update(task_params)
     end
   end
 end

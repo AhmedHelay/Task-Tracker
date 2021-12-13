@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module Mutations
   class CreateProject < BaseMutation
-
     argument :name, String, required: true
     argument :description, String, required: false
 

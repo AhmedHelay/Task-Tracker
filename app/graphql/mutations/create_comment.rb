@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module Mutations
   class CreateComment < BaseMutation
-
     argument :task_id, Integer, required: true
     argument :content, String, required: true
 

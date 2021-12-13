@@ -1,10 +1,10 @@
+# frozen_string_literal: true
+
 module Mutations
   class UpdateComment < BaseMutation
-
-    argument :id , ID , required: true
-    argument :task_id , Integer , required: true
-    argument :content, String , required: true
- 
+    argument :id, ID, required: true
+    argument :task_id, Integer, required: true
+    argument :content, String, required: true
 
     type Types::CommentType
 

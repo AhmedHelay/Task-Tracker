@@ -1,17 +1,19 @@
+# frozen_string_literal: true
+
 class UpdateTask
-	class PrepareParams 
-		include Interactor
+  class PrepareParams
+    include Interactor
 
-		delegate :task_params, :task, to: :context
-		
-		def call
-			context.task = prepare_task
-		end
+    delegate :task_params, :task, to: :context
 
-		private
+    def call
+      context.task = prepare_task
+    end
 
-		def prepare_task
-			Task.find(task_params[:id])
-		end
-	end
+    private
+
+    def prepare_task
+      Task.find(task_params[:id])
+    end
+  end
 end

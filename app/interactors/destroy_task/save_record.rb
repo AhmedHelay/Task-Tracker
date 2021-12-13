@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DestroyTask
   class SaveRecord
     include Interactor
@@ -6,15 +8,11 @@ class DestroyTask
 
     def call
       delete_comments
-      unless task.destroy
-        context.fail!(error: "Task destroy failed")
-      end
+      context.fail!(error: 'Task destroy failed') unless task.destroy
     end
 
     def delete_comments
-      Comment.where(task_id: id).each do |comment|
-        comment.destroy!
-      end
+      Comment.where(task_id: id).each(&:destroy!)
     end
   end
 end

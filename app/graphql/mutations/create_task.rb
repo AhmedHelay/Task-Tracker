@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mutations
   class CreateTask < BaseMutation
     argument :project_id, Integer, required: true

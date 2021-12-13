@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,60 +12,58 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_09_194214) do
-
+ActiveRecord::Schema.define(version: 20_211_209_194_214) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "citext"
-  enable_extension "plpgsql"
+  enable_extension 'citext'
+  enable_extension 'plpgsql'
 
-  create_table "activities", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.string "kind"
-    t.string "target_type"
-    t.integer "target_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table 'activities', force: :cascade do |t|
+    t.integer 'user_id', null: false
+    t.string 'kind'
+    t.string 'target_type'
+    t.integer 'target_id'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
   end
 
-  create_table "comments", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "task_id"
-    t.text "content"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table 'comments', force: :cascade do |t|
+    t.integer 'user_id'
+    t.integer 'task_id'
+    t.text 'content'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
   end
 
-  create_table "projects", force: :cascade do |t|
-    t.string "name"
-    t.text "description"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table 'projects', force: :cascade do |t|
+    t.string 'name'
+    t.text 'description'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
   end
 
-  create_table "tasks", force: :cascade do |t|
-    t.integer "project_id"
-    t.string "title"
-    t.text "description"
-    t.string "status"
-    t.datetime "deadline_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table 'tasks', force: :cascade do |t|
+    t.integer 'project_id'
+    t.string 'title'
+    t.text 'description'
+    t.string 'status'
+    t.datetime 'deadline_at'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
   end
 
-  create_table "user_projects", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "project_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table 'user_projects', force: :cascade do |t|
+    t.integer 'user_id'
+    t.integer 'project_id'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "username", null: false
-    t.citext "email", null: false
-    t.string "password_digest", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["email"], name: "index_users_on_email", unique: true
+  create_table 'users', force: :cascade do |t|
+    t.string 'username', null: false
+    t.citext 'email', null: false
+    t.string 'password_digest', null: false
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index ['email'], name: 'index_users_on_email', unique: true
   end
-
 end

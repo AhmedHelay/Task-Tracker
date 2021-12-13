@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateSession
   class SaveRecord
     include Interactor
@@ -8,7 +10,7 @@ class CreateSession
       if authenticated_user
         context.session_id = authenticated_user.id
       else
-      context.fail!(error: 'Wrong email or password')
+        context.fail!(error: 'Wrong email or password')
       end
     end
   end

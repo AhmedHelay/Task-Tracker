@@ -1,12 +1,13 @@
+# frozen_string_literal: true
+
 class SessionsController < ApplicationController
-  #skip_after_action :verify_authorized
+  # skip_after_action :verify_authorized
 
   def new
     @user = User.new
   end
-  
-  def create
 
+  def create
     authenticated_user = CreateSession.call(session_params: session_params)
     if authenticated_user.success?
       session[:current_user_id] = authenticated_user.session_id

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UpdateComment
   class SaveRecord
     include Interactor
@@ -5,9 +7,7 @@ class UpdateComment
     delegate :comment_params, :comment, to: :context
 
     def call
-      unless comment.update(comment_params)
-        context.fail!(error: "Invalid data")
-      end
+      context.fail!(error: 'Invalid data') unless comment.update(comment_params)
     end
   end
 end

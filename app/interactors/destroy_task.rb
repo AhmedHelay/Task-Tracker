@@ -1,6 +1,8 @@
-class DestroyTask
-	include Interactor::Organizer
+# frozen_string_literal: true
 
-	organize 	DestroyTask::PrepareParams,
-						DestroyTask::SaveRecord
+class DestroyTask
+  include Interactor::Organizer
+
+  organize DestroyTask::PrepareParams,
+           DestroyTask::SaveRecord
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DestroyProject
   class SaveRecord
     include Interactor
@@ -7,21 +9,17 @@ class DestroyProject
     def call
       delete_tasks
       delete_projects_relation
-      unless project.destroy 
-        context.fail!(error: "Project destroy failed")
-      end
+      context.fail!(error: 'Project destroy failed') unless project.destroy
     end
 
     def delete_tasks
       Task.where(project_id: id).each do |task|
-          DestroyTask.call(id: task.id, current_user: current_user)
+        DestroyTask.call(id: task.id, current_user: current_user)
       end
-    end 
+    end
 
     def delete_projects_relation
-      UserProject.where(project_id: id).each do |userProject|
-        userProject.destroy
-      end
+      UserProject.where(project_id: id).each(&:destroy)
     end
   end
 end

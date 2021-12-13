@@ -1,7 +1,9 @@
-class UpdateComment
-	include Interactor::Organizer
+# frozen_string_literal: true
 
-	organize 	UpdateComment::PrepareParams,
-						UpdateComment::SaveRecord,
-						UpdateComment::SendNotifications
+class UpdateComment
+  include Interactor::Organizer
+
+  organize UpdateComment::PrepareParams,
+           UpdateComment::SaveRecord,
+           UpdateComment::SendNotifications
 end

@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 module Mutations
   class UpdateProject < BaseMutation
-
-    argument :id , ID , required: true
+    argument :id, ID, required: true
     argument :name, String, required: true
     argument :description, String, required: false
 

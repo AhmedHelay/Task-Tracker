@@ -1,6 +1,8 @@
-class CreateTask
-	include Interactor::Organizer
+# frozen_string_literal: true
 
-	organize 	CreateTask::SaveRecord,
-					 	CreateTask::SendNotifications
+class CreateTask
+  include Interactor::Organizer
+
+  organize CreateTask::SaveRecord,
+           CreateTask::SendNotifications
 end

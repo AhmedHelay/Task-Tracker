@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Types
   class QueryType < Types::BaseObject
     # Add `node(id: ID!) and `nodes(ids: [ID!]!)`
@@ -5,16 +7,16 @@ module Types
     include GraphQL::Types::Relay::HasNodesField
 
     # Users of ->> Project
-    field :project_users , resolver: Resolvers::ProjectUsers
+    field :project_users, resolver: Resolvers::ProjectUsers
 
-    # Project 
-    field :projects , resolver: Resolvers::Projects
-    field :project , resolver: Resolvers::Project
+    # Project
+    field :projects, resolver: Resolvers::Projects
+    field :project, resolver: Resolvers::Project
 
-    #Task 
-    field :tasks , resolver: Resolvers::Tasks
+    # Task
+    field :tasks, resolver: Resolvers::Tasks
 
-    #Comment 
-    field :comments , resolver: Resolvers::Comments
+    # Comment
+    field :comments, resolver: Resolvers::Comments
   end
 end

@@ -1,17 +1,19 @@
+# frozen_string_literal: true
+
 class CreateTask
-    class SendNotifications
-        include Interactor
+  class SendNotifications
+    include Interactor
 
-        delegate :current_user, :task,  to: :context
+    delegate :current_user, :task, to: :context
 
-        def call
-            create_avtivity
-        end
-
-        private 
-
-        def create_avtivity
-            RegisterActivityJob.perform_now(current_user.id, "Task Created", task.id, "Task")
-        end
+    def call
+      create_avtivity
     end
+
+    private
+
+    def create_avtivity
+      RegisterActivityJob.perform_now(current_user.id, 'Task Created', task.id, 'Task')
+    end
+  end
 end

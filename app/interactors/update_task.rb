@@ -1,7 +1,9 @@
-class UpdateTask
-	include Interactor::Organizer
+# frozen_string_literal: true
 
-	organize 	UpdateTask::PrepareParams,
-						UpdateTask::SaveRecord,
-            UpdateTask::SendNotifications
+class UpdateTask
+  include Interactor::Organizer
+
+  organize UpdateTask::PrepareParams,
+           UpdateTask::SaveRecord,
+           UpdateTask::SendNotifications
 end
