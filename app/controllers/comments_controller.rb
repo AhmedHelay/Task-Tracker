@@ -45,9 +45,4 @@ class CommentsController < ApplicationController
   def comment_params
     params.require(:comment).permit(:task_id, :content)
   end
-
-  before_action :require_login
-  def require_login
-    redirect_to new_user_registration_path unless current_user
-  end
 end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class SessionsController < ApplicationController
-  # skip_after_action :verify_authorized
+  before_action :skip_authorization
 
   def new
     @user = User.new

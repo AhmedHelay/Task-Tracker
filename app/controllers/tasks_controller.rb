@@ -3,13 +3,17 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i[show edit update destroy]
   before_action :authenticate_current_user!
+  before_action -> {authorize @task}, only: %i[show edit update destroy]
+  after_action :verify_authorized, except: %i[create new]
 
   def index
     @tasks = Task.where(project_id: @project.id)
+    skip_authorization
   end
 
   def show
     @comment = Comment.new
+    authorize @task
   end
 
   def new
@@ -17,10 +21,12 @@ class TasksController < ApplicationController
   end
 
   def edit
+    authorize @task
     @project = Project.find_by(id: @task.project_id)
   end
 
   def create
+    authorize Task, :create?
     @task ||=
       CreateTask.call(current_user: current_user, task_params: task_params)
     if @task.success!
@@ -40,6 +46,7 @@ class TasksController < ApplicationController
   end
 
   def destroy
+    authorize @task
     id = @task.project_id
     DestroyTask.call(id: @task.id, current_user: current_user)
     redirect_to project_path(id), notice: 'Task destroyed successfully'
@@ -53,9 +60,5 @@ class TasksController < ApplicationController
 
   def task_params
     params.require(:task).permit(:id, :title, :description, :deadline_at, :project_id, :status)
-  end
-
-  def require_login
-    redirect_to new_user_registration_path unless current_user
   end
 end
