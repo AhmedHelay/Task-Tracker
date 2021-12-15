@@ -4,7 +4,7 @@ class ProjectsController < ApplicationController
   before_action :set_project, only: %i[show edit update destroy add_user]
   before_action :authenticate_current_user!
   before_action -> { authorize @project }, only: %i[show edit update destroy]
-  after_action :verify_authorized
+  after_action :verify_authorized, except: %i[index]
 
   def index
     @projects =
