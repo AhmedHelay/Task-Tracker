@@ -4,9 +4,9 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit update destroy]
   before_action :authenticate_current_user!, except: %i[create new]
   before_action -> { authorize @user }, only: %i[edit update destroy]
-  
+
   skip_after_action :verify_authorized, only: %i[new edit create update]
-  
+
   rescue_from ActiveRecord::RecordInvalid, with: :record_error!
 
   def show
@@ -53,6 +53,6 @@ class UsersController < ApplicationController
   end
 
   def record_error!
-    redirect_back fallback_location: new_user_path, alter: "Validation error"
+    redirect_back fallback_location: new_user_path, alter: 'Validation error'
   end
 end

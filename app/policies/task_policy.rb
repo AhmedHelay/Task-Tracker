@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class TaskPolicy < ApplicationPolicy
-  alias_method :task, :record
+  alias task record
   class Scope < Scope
     def resolve
       scope.all
@@ -24,12 +24,12 @@ class TaskPolicy < ApplicationPolicy
     taskUser
   end
 
-  private 
+  private
 
   def taskUser
     UserProject
-    .where(project_id: task.project_id)
-    .map(&:user_id)
-    .include?(user.id) 
+      .where(project_id: task.project_id)
+      .map(&:user_id)
+      .include?(user.id)
   end
 end
