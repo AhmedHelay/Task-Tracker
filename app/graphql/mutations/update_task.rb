@@ -2,15 +2,13 @@
 
 module Mutations
   class UpdateTask < BaseMutation
-    argument :id, ID, required: true
-    argument :title, String, required: true
-    argument :description, String, required: false
+    argument :input, Types::Inputs::TaskInput, required: true
 
     type Types::TaskType
 
-    def resolve(**params)
+    def resolve(input:)
       result = ::UpdateTask.call(
-        task_params: params,
+        task_params: input.to_h,
         current_user: current_user
       )
       result.task if result.success?

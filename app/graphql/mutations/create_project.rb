@@ -2,14 +2,13 @@
 
 module Mutations
   class CreateProject < BaseMutation
-    argument :name, String, required: true
-    argument :description, String, required: false
+    argument :input, Types::Inputs::ProjectInput, required: true
 
     type Types::ProjectType
 
-    def resolve(**params)
+    def resolve(input:)
       result = ::CreateProject.call(
-        project_params: params,
+        project_params: input.to_h,
         current_user: current_user
       )
       result.project if result.success?
