@@ -2,8 +2,7 @@
 
 module Types
   module Inputs
-    class CommentInput < Types::BaseInputObject
-      argument :id, ID, required: false
+    class CreateCommentInput < Types::BaseInputObject
       argument :task_id, Integer, required: true
       argument :content, String, required: true
     end

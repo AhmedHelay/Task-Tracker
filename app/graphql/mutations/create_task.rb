@@ -2,7 +2,7 @@
 
 module Mutations
   class CreateTask < BaseMutation
-    argument :input, Types::Inputs::TaskInput, required: true
+    argument :input, Types::Inputs::CreateTaskInput, required: true
 
     type Types::TaskType
 

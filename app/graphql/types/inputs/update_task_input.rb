@@ -2,9 +2,10 @@
 
 module Types
   module Inputs
-    class ProjectInput < Types::BaseInputObject
+    class UpdateTaskInput < Types::BaseInputObject
       argument :id, ID, required: false
-      argument :name, String, required: true
+      argument :project_id, Integer, required: false
+      argument :title, String, required: true
       argument :description, String, required: false
     end
   end

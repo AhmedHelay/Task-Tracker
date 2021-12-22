@@ -2,7 +2,7 @@
 
 module Mutations
   class UpdateProject < BaseMutation
-    argument :input, Types::Inputs::ProjectInput, required: true
+    argument :input, Types::Inputs::UpdateProjectInput, required: true
 
     type Types::ProjectType
 

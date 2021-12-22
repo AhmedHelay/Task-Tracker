@@ -2,8 +2,7 @@
 
 module Types
   module Inputs
-    class TaskInput < Types::BaseInputObject
-      argument :id, ID, required: false
+    class CreateTaskInput < Types::BaseInputObject
       argument :project_id, Integer, required: false
       argument :title, String, required: true
       argument :description, String, required: false

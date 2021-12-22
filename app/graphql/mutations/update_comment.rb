@@ -2,7 +2,7 @@
 
 module Mutations
   class UpdateComment < BaseMutation
-    argument :input, Types::Inputs::CommentInput, required: true
+    argument :input, Types::Inputs::UpdateCommentInput, required: true
 
     type Types::CommentType
 
