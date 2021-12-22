@@ -7,7 +7,7 @@ module Resolvers
     type [Types::CommentType], null: false
 
     def resolve(**params)
-      ::Comment.where('task_id = ?', params[:id])
+      ::Comment.where(task_id: params[:task_id])
     end
   end
 end
