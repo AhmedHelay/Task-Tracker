@@ -13,7 +13,7 @@ class ProjectsController < ApplicationController
         .where(user_id: current_user.id)
         .map(&:project_id)
       )
-      skip_authorization
+    skip_authorization
   end
 
   def show

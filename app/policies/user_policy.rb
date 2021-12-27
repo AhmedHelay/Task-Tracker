@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 2
 class UserPolicy < ApplicationPolicy
   class Scope < Scope
@@ -7,8 +8,7 @@ class UserPolicy < ApplicationPolicy
     end
   end
 
-  def edit?
-  end
+  def edit?; end
 
   def update?
     user.id == record.id

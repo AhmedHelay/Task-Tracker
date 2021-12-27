@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class ProjectPolicy < ApplicationPolicy
-  alias_method :project, :record
+  alias project record
 
   class Scope < Scope
     def resolve
@@ -26,7 +28,9 @@ class ProjectPolicy < ApplicationPolicy
   def add_user?
     isProjectUser
   end
-  private 
+
+  private
+
   def isProjectUser
     UserProject.exists?(user_id: user.id, project_id: project.id)
   end

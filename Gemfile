@@ -27,6 +27,7 @@ gem 'sidekiq'
 gem 'bcrypt', '~> 3.1.7'
 
 gem 'rubocop', '~> 0.39.0'
+gem "action_policy"
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

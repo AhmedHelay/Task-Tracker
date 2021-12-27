@@ -9,8 +9,7 @@ class CreateSession
     def call
       context.session_id = authenticated_user.id
       context.access_token = ::JWT.encode({
-                                            sub: authenticated_user.id,
-                                            exp: 1.hour
+                                            sub: authenticated_user.id
                                           }, jwt_secret, 'HS256')
     end
 
