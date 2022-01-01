@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class TaskPolicy < ApplicationPolicy
-  alias task record
+  alias_method :task, :record
   class Scope < Scope
     def resolve
       scope.all

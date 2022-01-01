@@ -2,6 +2,7 @@
 
 module Mutations
   class BaseMutation < GraphQL::Schema::Mutation
+    include ActionPolicy::GraphQL::Behaviour
     include ::GraphqlErrors
 
     argument_class Types::BaseArgument

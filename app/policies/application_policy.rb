@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
-class ApplicationPolicy
+class ApplicationPolicy < ActionPolicy::Base
   attr_reader :user, :record
 
-  def initialize(user, record)
+  def initialize(record, user)
+    byebug
     @user = user
     @record = record
   end
@@ -24,7 +25,7 @@ class ApplicationPolicy
     false
   end
 
-  def edit?
+def edit?
     update?
   end
 

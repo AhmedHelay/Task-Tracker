@@ -7,6 +7,7 @@ module Mutations
     type Types::ProjectType
 
     def resolve(input:)
+    #  authorize! Project.new, to: :create?
       result = ::CreateProject.call(
         project_params: input.to_h,
         current_user: current_user
