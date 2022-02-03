@@ -13,7 +13,7 @@ class UpdateTask
     private
 
     def create_avtivity
-      RegisterActivityJob.perform_now(current_user.id, 'Task Updated', task.id, 'Task')
+      RegisterActivityJob.perform_later(current_user.id, 'Task Updated', task.id, 'Task')
     end
   end
 end

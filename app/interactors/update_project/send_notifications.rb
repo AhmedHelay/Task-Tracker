@@ -18,7 +18,7 @@ class UpdateProject
     end
 
     def create_avtivity
-      RegisterActivityJob.perform_now(current_user.id, 'Project Updated', project.id, 'Project')
+      RegisterActivityJob.perform_later(current_user.id, 'Project Updated', project.id, 'Project')
     end
   end
 end

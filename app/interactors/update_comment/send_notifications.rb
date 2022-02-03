@@ -13,7 +13,7 @@ class UpdateComment
     private
 
     def create_avtivity
-      RegisterActivityJob.perform_now(current_user.id, 'Comment Updated', comment.id, 'Comment')
+      RegisterActivityJob.perform_later(current_user.id, 'Comment Updated', comment.id, 'Comment')
     end
   end
 end
