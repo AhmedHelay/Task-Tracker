@@ -26,23 +26,23 @@ gem 'sidekiq'
 
 gem 'bcrypt', '~> 3.1.7'
 
-gem "action_policy"
-gem "action_policy-graphql"
+gem 'action_policy'
+gem 'action_policy-graphql'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'dotenv-rails'
   gem 'graphql'
   gem 'letter_opener'
   gem 'rspec-rails', '~> 5.0.0'
-  gem 'dotenv-rails'
 end
 
 group :development do
   gem 'listen', '~> 3.3'
   gem 'rack-mini-profiler', '~> 2.0'
+  gem 'rubocop', '~> 0.39.0'
   gem 'spring'
   gem 'web-console', '>= 4.1.0'
-  gem 'rubocop', '~> 0.39.0'
 end
 
 group :test do

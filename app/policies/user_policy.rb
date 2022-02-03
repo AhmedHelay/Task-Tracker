@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-2
 class UserPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
@@ -8,17 +7,21 @@ class UserPolicy < ApplicationPolicy
     end
   end
 
-  def edit?; end
+  def edit?
+    isUser
+  end
 
   def update?
-    user.id == record.id
+    isUser
   end
 
-  def new?
-    create?
+  def destroy?
+    isUser
   end
 
-  def create?
-    user.nil?
+  private
+
+  def isUser
+    record.id == user.id
   end
 end

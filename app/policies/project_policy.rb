@@ -1,16 +1,12 @@
 # frozen_string_literal: true
 
 class ProjectPolicy < ApplicationPolicy
-  alias_method :project, :record
+  alias project record
 
   class Scope < Scope
     def resolve
       scope.all
     end
-  end
-
-  def create?
-    false
   end
 
   def show?

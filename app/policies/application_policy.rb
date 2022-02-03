@@ -4,8 +4,7 @@ class ApplicationPolicy < ActionPolicy::Base
   attr_reader :user, :record
 
   def initialize(record, user)
-    byebug
-    @user = user
+    @user = user[:user]
     @record = record
   end
 
@@ -25,7 +24,7 @@ class ApplicationPolicy < ActionPolicy::Base
     false
   end
 
-def edit?
+  def edit?
     update?
   end
 

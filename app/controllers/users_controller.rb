@@ -3,38 +3,36 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit update destroy]
   before_action :authenticate_current_user!, except: %i[create new]
-  before_action -> { authorize @user }, only: %i[edit update destroy]
+  before_action -> { authorize! @user }, only: %i[edit update destroy]
+  before_action :skip_verify_authorized!, only: %i[show new create]
 
-  skip_after_action :verify_authorized, only: %i[new edit create update]
+  after_action :verify_authorized, only: %i[edit update destroy]
 
   rescue_from ActiveRecord::RecordInvalid, with: :record_error!
 
-  def show
-    skip_authorization
-  end
+  def show; end
 
   def edit
-    authorize @user
+    authorize! @user
   end
 
   def new
     @user = User.new
-    authorize @user
   end
 
   def create
     @user = CreateUser.call(user_params: user_params)
-    authorize @user
     if @user.success?
-      redirect_to new_session_path, notice: 'User Created'
+      redirect_to projects_path, notice: 'User Created'
     else
       render :new, notice: 'Failed to create user'
     end
   end
 
   def update
-    authorize @user
+    authorize! @user
     @user = UpdateUser.call(user_params: user_params.merge(id: @user.id))
+    byebug
     if @user.success?
       redirect_to projects_path, notice: 'User updated'
     else
