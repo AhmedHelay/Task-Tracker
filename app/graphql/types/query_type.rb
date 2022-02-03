@@ -6,8 +6,11 @@ module Types
     include GraphQL::Types::Relay::HasNodeField
     include GraphQL::Types::Relay::HasNodesField
 
-    # Users of ->> Project
+    # Users of a Project
     field :project_users, resolver: Resolvers::ProjectUsers
+
+    # User
+    field :users, resolver: Resolvers::Users
 
     # Project
     field :projects, resolver: Resolvers::Projects

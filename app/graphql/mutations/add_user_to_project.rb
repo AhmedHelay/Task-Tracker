@@ -8,9 +8,13 @@ module Mutations
     type [Types::UserProjectType]
 
     def resolve(**params)
-      # How to Get context msg
-      ::AddProjectToUser.call(email: params[:email], project_id: params[:project_id])
-      ::UserProject.where(project_id: params[:project_id])
+      result = ::AddProjectToUser.call(email: params[:email], project_id: params[:project_id])
+
+      if result.success?
+        result.user_project
+      else
+        result.errror
+      end
     end
   end
 end

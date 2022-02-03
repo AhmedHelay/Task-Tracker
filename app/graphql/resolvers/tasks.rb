@@ -6,7 +6,6 @@ module Resolvers
 
     def resolve(**_params)
       ::Task.all
-      # ::Task.where(project_id: params[:project_id])
     end
   end
 end

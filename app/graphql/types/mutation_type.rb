@@ -2,6 +2,10 @@
 
 module Types
   class MutationType < Types::BaseObject
+    # Authentication
+    field :sign_up, mutation: Mutations::SignUp
+    field :sign_in, mutation: Mutations::SignIn
+
     # UserProject
     field :add_user_to_project, mutation: Mutations::AddUserToProject
 

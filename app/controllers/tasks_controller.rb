@@ -13,7 +13,7 @@ class TasksController < ApplicationController
 
   def show
     @comment = Comment.new
-    authorize @task
+    authorize! @task
   end
 
   def new
@@ -21,12 +21,11 @@ class TasksController < ApplicationController
   end
 
   def edit
-    authorize @task
+    authorize! @task
     @project = Project.find_by(id: @task.project_id)
   end
 
   def create
-    authorize Task, :create?
     @task ||=
       CreateTask.call(current_user: current_user, task_params: task_params)
     if @task.success!
@@ -37,6 +36,7 @@ class TasksController < ApplicationController
   end
 
   def update
+    authorize! @task
     UpdateTask.call(task_params: task_params)
     if @task.success!
       redirect_to project_path(@task.project_id), notice: 'Task create failed'
@@ -46,7 +46,7 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    authorize @task
+    authorize! @task
     id = @task.project_id
     DestroyTask.call(id: @task.id, current_user: current_user)
     redirect_to project_path(id), notice: 'Task destroyed successfully'

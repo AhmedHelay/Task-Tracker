@@ -2,12 +2,15 @@
 
 class CreateUser
   class SaveRecord
-    include Interactor::Organizer
+    include Interactor
 
-    delegate :user_params, :user, to: :context
+    delegate :user_params, to: :context
+
     def call
       context.user = User.new(user_params)
-      context.fail!(errors: 'Error occured while creating user') unless user.save!
+      context.user.save!
+    rescue ActiveRecord::RecordInvalid
+      context.fail!
     end
   end
 end

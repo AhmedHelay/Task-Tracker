@@ -7,6 +7,7 @@ module Resolvers
     type Types::ProjectType, null: true
 
     def resolve(**params)
+      #authorize! Project, to: :show?
       ::Project.find_by(id: params[:id])
     end
   end

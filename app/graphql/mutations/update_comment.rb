@@ -2,15 +2,13 @@
 
 module Mutations
   class UpdateComment < BaseMutation
-    argument :id, ID, required: true
-    argument :task_id, Integer, required: true
-    argument :content, String, required: true
+    argument :input, Types::Inputs::UpdateCommentInput, required: true
 
     type Types::CommentType
 
-    def resolve(**params)
+    def resolve(input:)
       result = ::UpdateComment.call(
-        comment_params: params,
+        comment_params: input.to_h,
         current_user: current_user
       )
       result.comment if result.success?

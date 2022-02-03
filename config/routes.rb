@@ -10,4 +10,7 @@ Rails.application.routes.draw do
   resources :projects do
     post :add_user, on: :member
   end
+  
+  get '*path', :to => 'application#not_found'
+  
 end

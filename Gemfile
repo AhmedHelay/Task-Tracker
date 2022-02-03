@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.2'
+gem 'jwt'
 gem 'pg', '~> 1.2', '>= 1.2.3'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.1'
 
@@ -24,12 +25,13 @@ gem 'jquery-rails'
 gem 'sidekiq'
 
 gem 'bcrypt', '~> 3.1.7'
-gem 'pundit'
 
-gem 'rubocop', '~> 0.39.0'
+gem 'action_policy'
+gem 'action_policy-graphql'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'dotenv-rails'
   gem 'graphql'
   gem 'letter_opener'
   gem 'rspec-rails', '~> 5.0.0'
@@ -38,9 +40,11 @@ end
 group :development do
   gem 'listen', '~> 3.3'
   gem 'rack-mini-profiler', '~> 2.0'
+  gem 'rubocop', '~> 0.39.0'
   gem 'spring'
   gem 'web-console', '>= 4.1.0'
 end
+
 group :test do
   gem 'capybara', '>= 3.26'
   gem 'selenium-webdriver'
