@@ -7,6 +7,7 @@ class UpdateTask
     delegate :task, :current_user, to: :context
 
     def call
+      byebug
       create_avtivity
     end
 

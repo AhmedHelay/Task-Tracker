@@ -8,7 +8,7 @@ class DestroyTask
 
     def call
       context.task = Task.find(id)
-      context.fail!(error: "task doesn't exist") if task.nil?
+      context.fail!(error: 'Task not found, Deletion process failed') if task.nil?
     end
   end
 end

@@ -23,41 +23,45 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @project =
+    results  =
       CreateProject.call(current_user: current_user, project_params: project_params)
-    if @project.save!
+    if results.success?
       redirect_to projects_url, notice: 'Project created successfully'
     else
-      redirect_to projects_url, notice: 'Project creation failed failed'
+      redirect_to projects_url, notice: "#{result.error}"
     end
   end
 
   def update
     authorize! @project
-    @project = UpdateProject.call(
+    result = UpdateProject.call(
       current_user: current_user,
       project_params: project_params.merge(id: @project.id)
     )
-    if @project.save!
-      redirect_to projects_url, notice: 'Project was successfully updated'
+    if result.success?
+      redirect_to projects_url, notice: 'Project updated successfully'
     else
-      redirect_to projects_url, notice: 'Project update failed'
+      redirect_to edit_project_path(@project), notice: "#{result.error}"
     end
   end
 
   def destroy
     authorize! @project
-    DestroyProject.call(current_user: current_user, id: @project.id)
-    redirect_to projects_url, notice: 'Project destroyed successfully'
+    result = DestroyProject.call(current_user: current_user, id: @project.id)
+    if results.success?
+      redirect_to projects_url, notice: 'Project destroyed successfully'
+    else 
+      redirect_to projects_url, notice: "#{result.error}"
+    end
   end
 
   def add_user
     authorize! @project
     result = AddProjectToUser.call(email: add_user_params[:email], project_id: @project.id)
     if result.success?
-      redirect_to @project, notice: "Counld't find user with this email!"
+      redirect_to @project, notice: 'User added successfully' 
     else
-      redirect_to @project, notice: 'User added successfully'
+      redirect_to @project, notice: "#{result.error}"
     end
   end
 

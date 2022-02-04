@@ -16,23 +16,23 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @comment ||= CreateComment.call(comment_params: comment_params, current_user: current_user)
-    if @comment.save!
+    result = CreateComment.call(comment_params: comment_params, current_user: current_user)
+    if result.success?
       redirect_to task_path(@comment.task_id), notice: 'Comment created successfully'
     else
-      redirect_to task_path(comment_params[:task_id]), notice: 'Comment create failed'
+      redirect_to task_path(comment_params[:task_id]), notice: "#{result.error}"
     end
   end
 
   def update
-    @comment = UpdateComment.call(
+    result = UpdateComment.call(
       comment_params: comment_params.merge(id: @comment.id),
       current_user: current_user
     )
-    if @comment.save!
+    if result.success?
       redirect_to task_path(@comment.task_id), notice: 'Comment updated successfully'
     else
-      redirect_to task_path(comment_params[:task_id]), notice: 'Comment update failed'
+      redirect_to task_path(comment_params[:task_id]), notice: "#{result.error}"
     end
   end
 

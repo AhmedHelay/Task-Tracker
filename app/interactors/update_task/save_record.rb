@@ -7,7 +7,7 @@ class UpdateTask
     delegate :task_params, :task, to: :context
 
     def call
-      context.fail!(error: 'Invalid data') unless task.update(task_params)
+      context.fail!(error: 'Invalid task data') unless task.update(task_params)
     end
   end
 end

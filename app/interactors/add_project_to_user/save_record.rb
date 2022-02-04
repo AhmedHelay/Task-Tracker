@@ -13,7 +13,7 @@ class AddProjectToUser
     private
 
     def add_project_to_user
-      context.fails!(error: 'Error occurred') unless 
+      context.fails!(error: 'Server Error: Add user to project failed') unless 
         Project.find(project_id).users << user
     end
   end

@@ -7,8 +7,7 @@ class UpdateUser
     delegate :user_params, :user, to: :context
 
     def call
-      context.fail!(error: 'Invalid data') unless user.update(user_params)
-      user.save
+      context.fail!(error: 'Invalid user data') unless user.update(user_params)
     end
   end
 end

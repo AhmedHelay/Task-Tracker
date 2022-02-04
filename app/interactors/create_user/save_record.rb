@@ -4,13 +4,10 @@ class CreateUser
   class SaveRecord
     include Interactor
 
-    delegate :user_params, to: :context
+    delegate :user_params, :user, to: :context
 
     def call
       context.user = User.new(user_params)
-      context.user.save!
-    rescue ActiveRecord::RecordInvalid
-      context.fail!
-    end
+      context.fail!(errors: 'Invalid user data') unless context.user.save 
   end
 end

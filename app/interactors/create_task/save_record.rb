@@ -8,7 +8,7 @@ class CreateTask
 
     def call
       context.task = create_task
-      context.fail!(error: 'Invalid data') unless task.save
+      context.fail!(error: 'Invalid task data') unless task.save
     end
 
     private

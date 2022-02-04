@@ -21,22 +21,21 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = CreateUser.call(user_params: user_params)
-    if @user.success?
-      redirect_to projects_path, notice: 'User Created'
+    result = CreateUser.call(user_params: user_params)
+    if result.success?
+      redirect_to projects_path, notice: 'User created successfully'
     else
-      render :new, notice: 'Failed to create user'
+      render :new, notice: "#{result.error}"
     end
   end
 
   def update
     authorize! @user
-    @user = UpdateUser.call(user_params: user_params.merge(id: @user.id))
-    byebug
-    if @user.success?
-      redirect_to projects_path, notice: 'User updated'
+    result = UpdateUser.call(user_params: user_params.merge(id: @user.id))
+    if result.success?
+      redirect_to projects_path, notice: 'User updated successfully'
     else
-      redirect_to edit_user_path(@user), notice: 'Failed to update user'
+      redirect_to edit_user_path(@user), notice: "#{result.error}"
     end
   end
 

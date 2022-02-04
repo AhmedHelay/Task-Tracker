@@ -8,14 +8,14 @@ class SessionsController < ApplicationController
   end
 
   def create
-    authenticated_user = CreateSession.call(session_params: session_params)
-    if authenticated_user.success?
-      session[:current_user_id] = authenticated_user.session_id
+    result = CreateSession.call(session_params: session_params)
+    if result.success?
+      session[:current_user_id] = result.session_id
       redirect_to projects_path, notice: "You've successfully logged in!"
     else
       @user = User.new
-      @user.errors.add :base, authenticated_user.errors
-      render :new
+      @user.errors.add :base, result.errors
+      render :new 
     end
   end
 

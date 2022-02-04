@@ -26,30 +26,33 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task ||=
-      CreateTask.call(current_user: current_user, task_params: task_params)
-    if @task.success!
-      redirect_to project_path(task_params[:project_id]), notice: 'Task created successfully '
+    result = CreateTask.call(current_user: current_user, task_params: task_params)
+    if result.success?
+      redirect_to project_path(task_params[:project_id]), notice: 'Task created successfully'
     else
-      redirect_to project_path(task_params[:project_id]), notice: 'Task create failed'
+      redirect_to project_path(task_params[:project_id]), notice: "#{result.error}"
     end
   end
 
   def update
     authorize! @task
-    UpdateTask.call(task_params: task_params)
-    if @task.success!
-      redirect_to project_path(@task.project_id), notice: 'Task create failed'
+    result = UpdateTask.call(current_user: current_user, task_params: task_params.merge(id: @task.id))
+    if result.success?
+      redirect_to project_path(@task.project_id), notice: 'Task updated successfully'
     else
-      redirect_to edit_task_path(@task), notice: 'Task create failed'
+      redirect_to edit_task_path(@task), notice: "#{result.error}"
     end
   end
 
   def destroy
     authorize! @task
     id = @task.project_id
-    DestroyTask.call(id: @task.id, current_user: current_user)
-    redirect_to project_path(id), notice: 'Task destroyed successfully'
+    result = DestroyTask.call(id: @task.id, current_user: current_user)
+    if result.success?
+      redirect_to project_path(id), notice: 'Task destroyed successfully'
+    else 
+      redirect_to project_path(id), notice: "#{results.error}"
+    end
   end
 
   private
