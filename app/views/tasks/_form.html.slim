@@ -8,14 +8,14 @@
         - task.errors.each do |error|
           li
             = error.full_message
-  .field.form-group
+  .field.form-group.mb-1
     = form.hidden_field :project_id , :value => @project.id
-  .field.form-group
+  .field.form-group.mb-1
     = form.text_field :title , class: 'form-control', placeholder: 'title'
-  .field.form-group
+  .field.form-group.mb-1
     = form.text_area :description , class: 'form-control', placeholder: 'description' , defaultValue: 'Empty'
-  .field.form-group.text-dark
+  .field.form-group.text-dark.mb-1.rounded
     = form.datetime_select :deadline_at , class: 'form-control text-dark', placeholder: 'deadline'
     = form.select :status, ['Not started yet','On progress','On pause','Finished']
   .actions
-    = form.submit class: 'btn btn-primary'
+    = form.submit class: 'btn btn-primary my-2'

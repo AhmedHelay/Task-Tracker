@@ -1,5 +1,5 @@
 h1 Projects
-table.table.table-responsive.table-light.table-hover.table-striped.table-bordered
+table.table.table-responsive.table-light.table-hover.table-striped.table-bordered.rounded
   thead.thead-light
     tr
       th Name
@@ -18,5 +18,4 @@ table.table.table-responsive.table-light.table-hover.table-striped.table-bordere
           = link_to 'Edit', edit_project_path(project) ,class: 'btn btn-secondary'
         td
           = link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } , class: 'btn btn-danger'
-br
-= link_to 'New Project', new_project_path , class: "btn btn-primary"
+= link_to 'New Project', new_project_path , class: "btn btn-primary mt-1"

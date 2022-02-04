@@ -1,5 +1,4 @@
 h1 Editing Task
 = render 'form', task: @task 
-br
-= link_to 'Show', @task ,class: 'btn btn-primary'
-= link_to 'Back', tasks_path ,class: 'btn btn-primary'
+= link_to 'Show', @task ,class: 'btn btn-primary me-2'
+= link_to 'Back', @task.project ,class: 'btn btn-primary'

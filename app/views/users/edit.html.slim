@@ -5,11 +5,11 @@
     = simple_form_for(@user) do |f|
       = f.error_notification
       .field.form-group
-        .form-inputs
+        .form-inputs.my-2
           = f.input :username, required: true, placeholder: @user.username
-        .form-inputs
+        .form-inputs.my-2
           = f.input :email, required: true, autofocus: true
-        .field.form-group
-          = f.input :password,    required: false, autofocus: true
+        .field.form-group.my-2
+          = f.input :password,    required: true, autofocus: true
       .form-actions
-        = f.button :submit, "Update", class: 'btn btn-primary'
+        = f.button :submit, "Update", class: 'btn btn-primary mt-2'

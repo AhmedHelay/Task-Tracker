@@ -8,9 +8,9 @@
         - project.errors.each do |error|
           li
             = error.full_message
-  .field.form-group
+  .field.form-group.mb-1
     = form.text_field :name , class: 'form-control', placeholder: 'name'
-  .field.form-group
+  .field.form-group.mb-1
     = form.text_area :description , class: 'form-control' , placeholder: 'description'
   .actions
-    = form.submit class: 'btn btn-primary'
+    = form.submit class: 'btn btn-primary my-2 ml-2'
