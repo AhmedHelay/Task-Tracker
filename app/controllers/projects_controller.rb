@@ -7,12 +7,7 @@ class ProjectsController < ApplicationController
   after_action :verify_authorized, except: %i[index create new show]
 
   def index
-    @projects =
-      Project.where(
-        id: UserProject
-        .where(user_id: current_user.id)
-        .map(&:project_id)
-      )
+    @projects = current_user.projects.load
   end
 
   def show

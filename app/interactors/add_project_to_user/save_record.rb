@@ -13,8 +13,8 @@ class AddProjectToUser
     private
 
     def add_project_to_user
-      context.user_project = UserProject.find_or_create_by(user_id: user.id, project_id: project_id)
-      context.fails!(error: 'Error occurred') unless user_project.save!
+      context.fails!(error: 'Error occurred') unless 
+        Project.find(project_id).users << user
     end
   end
 end

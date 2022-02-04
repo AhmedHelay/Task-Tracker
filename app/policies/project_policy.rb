@@ -32,6 +32,6 @@ class ProjectPolicy < ApplicationPolicy
   private
 
   def isProjectUser
-    UserProject.exists?(user_id: user.id, project_id: project.id)
+    project.user_ids.include?(user.id)
   end
 end

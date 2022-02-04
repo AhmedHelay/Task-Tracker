@@ -27,9 +27,6 @@ class TaskPolicy < ApplicationPolicy
   private
 
   def taskUser
-    UserProject
-      .where(project_id: task.project_id)
-      .map(&:user_id)
-      .include?(user.id)
+    task.user_ids.include?(user.id)
   end
 end

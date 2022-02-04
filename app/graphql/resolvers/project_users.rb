@@ -4,10 +4,10 @@ module Resolvers
   class ProjectUsers < Resolvers::Base
     argument :project_id, Integer, required: true
 
-    type [Types::UserProjectType], null: true
+    type [Types::Users], null: false
 
     def resolve(**params)
-      ::UserProject.where(project_id: params[:project_id])
+      ::Project.find(params[:project_id]).users
     end
   end
 end
