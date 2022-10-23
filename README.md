@@ -1,24 +1,23 @@
-# README
+# task-tracker-backend
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This project is a backend for [project](https://github.com/escalopa/task-tracker-frontend).
 
-Things you may want to cover:
+## Features
 
-* Ruby version
+- CRUD for different entities
+- Assositations queries
+- Authentication & Authorization
+- Logout
+- Save coockie for last login
 
-* System dependencies
+## Tools
 
-* Configuration
+- PostgresDB
+- bootstrap
+- slim
+- pandit
+- jwt
 
-* Database creation
 
-* Database initialization
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
